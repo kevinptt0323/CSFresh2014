@@ -1,0 +1,68 @@
+body
+{
+	background: url('../images/bg.jpg') ;
+	font-family: "Source Sans Pro", "Consolas", sans-serif;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+	font-size: 20pt;
+	width: 100%;
+}
+img
+{
+	font-size: 30pt;
+	display: block;
+	text-align: center;
+	margin: auto;
+}
+
+#main
+{
+	position: relative;
+	width: 80%;
+	margin: 0 auto;
+}
+
+#top
+{
+	width: 100%;
+	min-width: 800px;
+	margin: 70px auto;
+}
+#top .ui.segment
+{
+	height: 400px;
+}
+#NavBar
+{
+	width: 100%;
+	min-width: 800px;
+}
+#NavBar .ui.button
+{
+	font-size: 20pt;
+}
+#NavBar2
+{
+	display: none;
+	position: fixed;
+	top: 0;
+	margin: auto;
+	z-index: 900;
+	width: 80%;
+	min-width: 800px;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+#NavBar2.ui.pointing.menu .active.item:after {
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+#NavBar2 .item
+{
+	font-size: 20pt;
+}
+#NavBar2 .item.green { color: #A1CF64; }
+#NavBar2 .item.red { color: #D95C5C; }
+#NavBar2 .item.purple { color: #564F8A; }
+#NavBar2 .item.teal { color: #00B5AD; }
+
+#footer
+{
+}
