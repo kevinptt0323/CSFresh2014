@@ -63,6 +63,15 @@ img
 #NavBar2 .item.purple { color: #564F8A; }
 #NavBar2 .item.teal { color: #00B5AD; }
 
+.ui.ribbon.label {
+	font-size: 18pt;
+	left: -3.5rem;
+	padding-left: 3rem;
+}
+
 #footer
 {
+	position: relative;
+	width: 80%;
+	margin: 60px auto;
 }
