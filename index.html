@@ -5,8 +5,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<title>交大資工 2014 迎新宿營</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js?ver=2.0.3"></script>
+	<script src="http://semantic-ui.com/javascript/library/history.js"></script>
+	<script src="http://semantic-ui.com/javascript/library/easing.js"></script>
+	<script src="http://semantic-ui.com/javascript/library/ace/ace.js"></script>
+	<script src="http://semantic-ui.com/javascript/library/tablesort.js"></script>
+	<script src="http://semantic-ui.com/javascript/library/waypoints.js"></script>
 	<script type="text/javascript" src="javascript/semantic.js"></script>
 	<script type="text/javascript" src="javascript/core.js"></script>
+	<script type="text/javascript" src="javascript/scroll.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/semantic.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -18,7 +24,7 @@
 </head>
 
 <body>
-	<div id="main">
+	<div class="container" id="main">
 		<div class="ui two column grid" id="top">
 			<div class="row">
 				<div class="column">
@@ -36,19 +42,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="ui four buttons" id="NavBar">
-			<a class="ui green button intro">簡介</a>
-			<a class="ui red button staff">工作人員</a>
-			<a class="ui purple button signup">線上報名</a>
-			<a class="ui teal button contact">聯絡我們</a>
+		<div class="peek">
+			<div class="ui four item pointing menu Nav" id="NavBar">
+				<a class="item green intro">簡介</a>
+				<a class="item red staff">工作人員</a>
+				<a class="item purple signup">線上報名</a>
+				<a class="item teal contact">聯絡我們</a>
+			</div>
 		</div>
-		<div class="ui four item pointing menu" id="NavBar2">
-			<a class="item green intro">簡介</a>
-			<a class="item red staff">工作人員</a>
-			<a class="item purple signup">線上報名</a>
-			<a class="item teal contact">聯絡我們</a>
-		</div>
-		<div class="ui green segment" id="intro" style="margin-top: 200px">
+		<div id="block"></div>
+		<h2></h2>
+		<div class="ui green segment" id="intro">
 			<div class="ui ribbon green label"> 簡介 </div>
 			<p>
 			韓愈曰：「古之新生必參加宿營。宿營，所以傳道、授業、解惑也。」<br />
@@ -66,9 +70,11 @@
 			注意事項：請不要攜帶貴重物品，例如筆電、PSP、iPod等
 			</p>
 		</div>
+		<h2></h2>
 		<div class="ui red segment" id="staff">
 			<div class="ui ribbon red label"> 工作人員 </div>
 		</div>
+		<h2></h2>
 		<div class="ui purple segment" id="signup">
 			<div class="ui ribbon purple label"> 線上報名 </div>
 			<h1>請於 9/17中午 前填好報名表 ，完成線上報名程序 </h1>
@@ -100,6 +106,7 @@
 		 
 			</p>
 		</div>
+		<h2></h2>
 		<div class="ui teal segment" id="contact">
 			<div class="ui ribbon teal label"> 聯絡我們 </div>
 			<table class="ui table segment">

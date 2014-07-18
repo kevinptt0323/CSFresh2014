@@ -1,15 +1,15 @@
 jQuery(document).ready(function($) {
 	var NavBar = $('#NavBar');
-	var NavBar2 = $('#NavBar2');
 	var NavOffset = NavBar.offset().top;
 	$(window).scroll(function () {
 		if($(this).scrollTop() > NavOffset) {
-			NavBar2.show();
-			NavBar.hide();
+			NavBar.addClass('Float');
 		}
 		else {
-			NavBar2.hide();
-			NavBar.show();
+			NavBar.removeClass('Float').children('.item').removeClass('active');
 		}
+	});
+	$('.Nav > a').click(function() {
+		var index = $(this).parent().children('a').index(this);
 	});
 });

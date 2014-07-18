@@ -35,33 +35,42 @@ img
 {
 	width: 100%;
 	min-width: 800px;
+	/*box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);*/
 }
-#NavBar .ui.button
+#NavBar .item
 {
+	color: #fff;
 	font-size: 20pt;
 }
-#NavBar2
+#NavBar .item.green { background-color: #58CB73; }
+#NavBar .item.red { background-color: #D95C5C; }
+#NavBar .item.purple { background-color: #564F8A; }
+#NavBar .item.teal { background-color: #00B5AD; }
+
+#NavBar.Float
 {
-	display: none;
 	position: fixed;
 	top: 0;
 	margin: auto;
 	z-index: 900;
 	width: 80%;
 	min-width: 800px;
-	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }
-#NavBar2.ui.pointing.menu .active.item:after {
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+#NavBar.Float.ui.pointing.menu .active.item:after {
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.3);
 }
-#NavBar2 .item
+#NavBar.Float .item { background-color: #fff; }
+#NavBar.Float .item.green { color: #A1CF64; }
+#NavBar.Float .item.red { color: #D95C5C; }
+#NavBar.Float .item.purple { color: #564F8A; }
+#NavBar.Float .item.teal { color: #00B5AD; }
+
+#block
 {
-	font-size: 20pt;
+	height: 1px;
+	margin-top: 200px;
 }
-#NavBar2 .item.green { color: #A1CF64; }
-#NavBar2 .item.red { color: #D95C5C; }
-#NavBar2 .item.purple { color: #564F8A; }
-#NavBar2 .item.teal { color: #00B5AD; }
 
 .ui.ribbon.label {
 	font-size: 18pt;
