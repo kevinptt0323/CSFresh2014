@@ -1,15 +1,16 @@
 jQuery(document).ready(function($) {
-	var NavBar = $('#NavBar');
-	var NavOffset = NavBar.offset().top;
+	var $NavBar = $('#NavBar'), NavOffset = $NavBar.offset().top;
 	$(window).scroll(function () {
 		if($(this).scrollTop() > NavOffset) {
-			NavBar
+			$NavBar
+				.removeClass('item')
 				.addClass('Float')
 				.addClass('secondary')
 				.addClass('vertical');
 		}
 		else {
-			NavBar
+			$NavBar
+				.addClass('item')
 				.removeClass('Float')
 				.removeClass('secondary')
 				.removeClass('vertical')

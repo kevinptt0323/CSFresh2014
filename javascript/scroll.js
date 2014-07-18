@@ -28,7 +28,7 @@ semantic.ready = function() {
   var
 
     $peek             = $('.peek'),
-    $peekItem         = $peek.children('.menu').children('a.item'),
+    $peekItem         = $peek.children('.menu').children('.item'),
     $peekSubItem      = $peek.find('.item .menu .item'),
     $sortableTables   = $('.sortable.table'),
 
@@ -540,40 +540,40 @@ semantic.ready = function() {
       ;
       offset    = $waypoint.offset().top - 70;
       if(!$header.hasClass('active') ) {
-        $menu
-          .addClass('animating')
-        ;
         $headers
           .removeClass('active')
         ;
-        $body
-          .stop()
-          .one('scroll', function() {
-            $body.stop();
-          })
-          .animate({
-            scrollTop: offset
-          }, 500)
-          .promise()
-            .done(function() {
-              $menu
-                .removeClass('animating')
-              ;
-              $headers
-                .removeClass('active')
-              ;
-              $header
-                .addClass('active')
-              ;
-              $waypoint
-                .css('color', $header.css('border-right-color'))
-              ;
-              $waypoints
-                .removeAttr('style')
-              ;
-            })
-        ;
       }
+      $menu
+        .addClass('animating')
+      ;
+      $body
+        .stop()
+        .one('scroll', function() {
+          $body.stop();
+        })
+        .animate({
+          scrollTop: offset
+        }, 500)
+        .promise()
+          .done(function() {
+            $menu
+              .removeClass('animating')
+            ;
+            $headers
+              .removeClass('active')
+            ;
+            $header
+              .addClass('active')
+            ;
+            $waypoint
+              .css('color', $header.css('border-right-color'))
+            ;
+            $waypoints
+              .removeAttr('style')
+            ;
+          })
+        ;
     },
 
     peekSub: function() {
@@ -585,15 +585,17 @@ semantic.ready = function() {
         $subHeaderGroup = $header.find('.item'),
         $headerGroup    = $menu.children(),
         $waypoint       = $('.block').eq( $headerGroup.index( $header ) ),
-        $subWaypoint    = $waypoint.nextAll('h3').eq( $subHeaderGroup.index($subHeader) ),
+        $subWaypoint    = $waypoint.children('h3').eq( $subHeaderGroup.index($subHeader) ),
         offset          = $subWaypoint.offset().top - 80
       ;
       $menu
         .addClass('animating')
       ;
-      $headerGroup
-        .removeClass('active')
-      ;
+      if( !$header.hasClass('active') ) {
+        $headerGroup
+          .removeClass('active')
+        ;
+      }
       $subHeaderGroup
         .removeClass('active')
       ;
@@ -605,6 +607,9 @@ semantic.ready = function() {
           $menu
             .removeClass('animating')
           ;
+          $header
+            .addClass('active')
+          ;
           $subHeader
             .addClass('active')
           ;
@@ -613,6 +618,7 @@ semantic.ready = function() {
           $body.stop();
         })
       ;
+      return false;
     },
 
     swapStyle: function() {
@@ -785,6 +791,7 @@ semantic.ready = function() {
 
   $peekItem
     .on('click', handler.peek)
+    .children().on('click', function() { return false; });
   ;
   $peekSubItem
     .on('click', handler.peekSub)

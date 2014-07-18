@@ -33,19 +33,26 @@ img
 }
 #NavBar
 {
+	position: absolute;
 	width: 100%;
 	min-width: 800px;
 	/*box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);*/
 }
-#NavBar .item
+#NavBar > .item,
+#NavBar > .item > a
 {
-	color: #fff;
 	font-size: 20pt;
+	color: #fff;
 }
 #NavBar .item.green { background-color: #58CB73; }
 #NavBar .item.red { background-color: #D95C5C; }
 #NavBar .item.purple { background-color: #564F8A; }
 #NavBar .item.teal { background-color: #00B5AD; }
+
+#NavBar .item .menu
+{
+	display: none;
+}
 
 #NavBar.Float
 {
@@ -62,12 +69,22 @@ img
 {
 	background-color: transparent;
 	width: 200px;
+	color: #000;
 }
 
 #NavBar.Float .item.green { color: #A1CF64; }
 #NavBar.Float .item.red { color: #D95C5C; }
 #NavBar.Float .item.purple { color: #564F8A; }
 #NavBar.Float .item.teal { color: #00B5AD; }
+
+#NavBar.Float .item .menu
+{
+	display: block;
+}
+#NavBar.Float .item .menu
+{
+	font-size: 20pt;
+}
 
 
 #content > .segment
