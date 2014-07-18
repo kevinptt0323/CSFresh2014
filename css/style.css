@@ -57,10 +57,8 @@ img
 #NavBar.Float
 {
 	position: fixed;
-	top: 50px;
-	//z-index: 900;
-	/*min-width: 800px;*/
-	//box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+	top: 20px;
+	margin-left: -30px;
 }
 /*#NavBar.Float.ui.pointing.menu .active.item:after {
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.3);
@@ -87,10 +85,10 @@ img
 }
 
 
-#content > .segment
+#content
 {
 	position: relative;
-	left: 250px; 
+	left: 220px; 
 	width: 80%;
 	margin-top: 200px;
 }

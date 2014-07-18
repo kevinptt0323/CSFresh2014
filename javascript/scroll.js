@@ -538,7 +538,7 @@ semantic.ready = function() {
         $waypoint = $waypoints.eq( $group.index( $header ) ),
         offset
       ;
-      offset    = $waypoint.offset().top - 70;
+      offset    = $waypoint.offset().top - 20;
       if(!$header.hasClass('active') ) {
         $headers
           .removeClass('active')
@@ -586,7 +586,7 @@ semantic.ready = function() {
         $headerGroup    = $menu.children(),
         $waypoint       = $('.block').eq( $headerGroup.index( $header ) ),
         $subWaypoint    = $waypoint.children('h3').eq( $subHeaderGroup.index($subHeader) ),
-        offset          = $subWaypoint.offset().top - 80
+        offset          = $subWaypoint.offset().top - 40
       ;
       $menu
         .addClass('animating')
