@@ -50,25 +50,31 @@ img
 #NavBar.Float
 {
 	position: fixed;
-	top: 0;
-	margin: auto;
+	top: 50px;
 	z-index: 900;
-	width: 80%;
-	min-width: 800px;
-	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+	/*min-width: 800px;*/
+	//box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }
-#NavBar.Float.ui.pointing.menu .active.item:after {
+/*#NavBar.Float.ui.pointing.menu .active.item:after {
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.3);
+}*/
+#NavBar.Float .item
+{
+	background-color: transparent;
+	width: 200px;
 }
-#NavBar.Float .item { background-color: #fff; }
+
 #NavBar.Float .item.green { color: #A1CF64; }
 #NavBar.Float .item.red { color: #D95C5C; }
 #NavBar.Float .item.purple { color: #564F8A; }
 #NavBar.Float .item.teal { color: #00B5AD; }
 
-#block
+
+#content > .segment
 {
-	height: 1px;
+	position: relative;
+	left: 250px; 
+	width: 80%;
 	margin-top: 200px;
 }
 

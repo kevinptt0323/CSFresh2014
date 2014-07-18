@@ -38,7 +38,7 @@ semantic.ready = function() {
     $hideMenu         = $('#menu .hide.item'),
     $sortTable        = $('.sortable.table'),
     $demo             = $('.demo'),
-    $waypoints        = $peek.closest('.tab, .container').find('h2').first().siblings('h2').addBack(),
+    $waypoints        = $peek.closest('.tab, .container').find('.block').first().siblings('.block').addBack(),
 
     $menuPopup        = $('.ui.main.menu .popup.item'),
     $menuDropdown     = $('.ui.main.menu .dropdown'),
@@ -113,7 +113,7 @@ semantic.ready = function() {
           html
         ;
         $.each(types, function(name, type){
-          html += '<h2 class="ui dividing header">' + name + '</h2';
+          html += '<h2 class="ui dividing header">' + name + '</h2>';
           if($.isPlainObject(type)) {
             $.each(type, function(name, subType) {
               $element = $.zc(subType);
@@ -538,7 +538,7 @@ semantic.ready = function() {
         $waypoint = $waypoints.eq( $group.index( $header ) ),
         offset
       ;
-      offset    = $waypoint.offset().top - 90;
+      offset    = $waypoint.offset().top - 70;
       if(!$header.hasClass('active') ) {
         $menu
           .addClass('animating')
@@ -584,7 +584,7 @@ semantic.ready = function() {
         $menu           = $header.parent(),
         $subHeaderGroup = $header.find('.item'),
         $headerGroup    = $menu.children(),
-        $waypoint       = $('h2').eq( $headerGroup.index( $header ) ),
+        $waypoint       = $('.block').eq( $headerGroup.index( $header ) ),
         $subWaypoint    = $waypoint.nextAll('h3').eq( $subHeaderGroup.index($subHeader) ),
         offset          = $subWaypoint.offset().top - 80
       ;

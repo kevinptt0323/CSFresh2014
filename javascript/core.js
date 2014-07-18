@@ -3,10 +3,18 @@ jQuery(document).ready(function($) {
 	var NavOffset = NavBar.offset().top;
 	$(window).scroll(function () {
 		if($(this).scrollTop() > NavOffset) {
-			NavBar.addClass('Float');
+			NavBar
+				.addClass('Float')
+				.addClass('secondary')
+				.addClass('vertical');
 		}
 		else {
-			NavBar.removeClass('Float').children('.item').removeClass('active');
+			NavBar
+				.removeClass('Float')
+				.removeClass('secondary')
+				.removeClass('vertical')
+				.children('.item')
+				.removeClass('active');
 		}
 	});
 	$('.Nav > a').click(function() {
