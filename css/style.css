@@ -1,7 +1,7 @@
 body
 {
 	background: url('../images/bg.jpg') fixed;
-	font-family: "Source Sans Pro", "Consolas", sans-serif;
+	font-family: "Source Han Sans Regular", "文泉驛微米黑", "微軟正黑體", Consolas, sans-serif;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 	font-size: 20pt;
 	width: 100%;
@@ -41,6 +41,7 @@ body
 #NavBar .item.red { background-color: #D95C5C; }
 #NavBar .item.purple { background-color: #564F8A; }
 #NavBar .item.teal { background-color: #00B5AD; }
+#NavBar .item.orange { background-color: #FF7038; }
 
 #NavBar .item .menu
 {
@@ -67,6 +68,7 @@ body
 #NavBar.Float .item.red { color: #D95C5C; }
 #NavBar.Float .item.purple { color: #564F8A; }
 #NavBar.Float .item.teal { color: #00B5AD; }
+#NavBar.Float .item.orange { color: #F05940; }
 
 #NavBar.Float .item .menu
 {
@@ -114,6 +116,10 @@ body
 	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
 	max-width: 100%;
 	max-height: 100%;
+}
+#guestbook .fb.comment
+{
+	margin-top: 20px;
 }
 
 #footer
