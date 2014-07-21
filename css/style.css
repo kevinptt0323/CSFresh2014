@@ -1,10 +1,11 @@
 body
 {
+	position: relative;
 	background: url('../images/bg.jpg') fixed;
 	font-family: "Source Han Sans Regular", "文泉驛微米黑", "微軟正黑體", Consolas, sans-serif;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 	font-size: 20pt;
-	width: 100%;
+	min-width: 1000px;
 }
 
 #main
@@ -16,8 +17,8 @@ body
 
 #top
 {
+	position: relative;
 	width: 100%;
-	min-width: 800px;
 	margin: 70px auto;
 }
 #top .ui.segment
@@ -28,7 +29,8 @@ body
 {
 	position: absolute;
 	width: 100%;
-	min-width: 800px;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
 	/*box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);*/
 }
 #NavBar > .item,
@@ -53,6 +55,9 @@ body
 	position: fixed;
 	top: 20px;
 	margin-left: -30px;
+	width: 200px;
+	box-shadow: 0 0 0;
+	border-radius: 0;
 }
 /*#NavBar.Float.ui.pointing.menu .active.item:after {
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.3);
@@ -60,7 +65,6 @@ body
 #NavBar.Float .item
 {
 	background-color: transparent;
-	width: 200px;
 	color: #000;
 }
 
@@ -73,9 +77,7 @@ body
 #NavBar.Float .item .menu
 {
 	display: block;
-}
-#NavBar.Float .item .menu
-{
+	width: 205px;
 	font-size: 20pt;
 }
 
@@ -88,12 +90,21 @@ body
 	margin-top: 200px;
 }
 
+.block
+{
+	border: 1px solid #ddd;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
 .ui.ribbon.label
 {
 	font-size: 18pt;
 	left: -3.5rem;
 	padding-left: 3rem;
+	box-shadow: 1px 4px 7px rgba(0, 0, 0, 0.5);
 }
+
+#staff h3 { color: #564F8A; }
 
 #staff .ui.segment .attached.label
 {
@@ -124,7 +135,5 @@ body
 
 #footer
 {
-	position: relative;
-	width: 80%;
-	margin: 60px auto;
+	margin-bottom: 200px;
 }
