@@ -38,7 +38,7 @@ semantic.ready = function() {
     $hideMenu         = $('#menu .hide.item'),
     $sortTable        = $('.sortable.table'),
     $demo             = $('.demo'),
-    $waypoints        = $peek.closest('.tab, .container').find('.block').first().siblings('.block').addBack(),
+    $waypoints        = $peek.closest('#main').find('.block').first().siblings('.block').addBack(),
 
     $menuPopup        = $('.ui.main.menu .popup.item'),
     $menuDropdown     = $('.ui.main.menu .dropdown'),

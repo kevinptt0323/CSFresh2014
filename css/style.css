@@ -17,13 +17,21 @@ body
 
 #top
 {
-	position: relative;
-	width: 100%;
-	margin: 70px auto;
+	position: fixed;
+	top: 70px;
+	width: 80%;
+	margin: auto;
 }
 #top .ui.segment
 {
 	height: 400px;
+}
+#bottom
+{
+	position: relative;
+	top: 540px;
+	background: url('../images/bg.jpg') fixed;
+	padding-bottom: 500px;
 }
 #NavBar
 {
@@ -86,8 +94,8 @@ body
 {
 	position: relative;
 	left: 220px; 
+	top: 130px;
 	width: 80%;
-	margin-top: 200px;
 }
 
 .block
@@ -131,9 +139,4 @@ body
 #guestbook .fb.comment
 {
 	margin-top: 20px;
-}
-
-#footer
-{
-	margin-bottom: 200px;
 }
