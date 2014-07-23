@@ -1,6 +1,6 @@
 body
 {
-	position: relative;
+	position: absolute;
 	background: url('../images/bg.jpg') fixed;
 	font-family: "Source Han Sans Regular", "文泉驛微米黑", "微軟正黑體", Consolas, sans-serif;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
