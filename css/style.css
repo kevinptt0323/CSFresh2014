@@ -3,8 +3,8 @@ body
 	position: absolute;
 	background: url('../images/bg.jpg') fixed;
 	font-family: "Source Han Sans Regular", "文泉驛微米黑", "微軟正黑體", Consolas, sans-serif;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-	font-size: 20pt;
+	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+	font-size: 18pt;
 	min-width: 1000px;
 }
 
@@ -102,6 +102,12 @@ body
 {
 	border: 1px solid #ddd;
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5) !important;
+}
+.block p
+{
+	color: #5F4B42;
+	text-shadow: 1px 1px 5px #937647;
+	line-height: 28pt;
 }
 
 .ui.ribbon.label
