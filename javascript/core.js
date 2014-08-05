@@ -40,7 +40,7 @@ jQuery(document).ready(function($) {
 				.removeClass('active');
 		}
 	});
-	$('.Nav > a').click(function() {
-		var index = $(this).parent().children('a').index(this);
+	$('.popup').popup({
+		transition: "vertical flip"
 	});
 });
