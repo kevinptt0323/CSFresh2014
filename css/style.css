@@ -2,9 +2,7 @@ body
 {
 	position: absolute;
 	background: url('../images/bg.jpg') fixed;
-	font-family: "Source Han Sans Regular", "文泉驛微米黑", "微軟正黑體", Consolas, sans-serif;
-	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	font-size: 18pt;
+	width: 100%;
 	min-width: 1000px;
 }
 
@@ -13,6 +11,9 @@ body
 	position: relative;
 	width: 80%;
 	margin: 0 auto;
+	font-family: "Source Han Sans Regular", "文泉驛微米黑", "微軟正黑體", Consolas, sans-serif;
+	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+	font-size: 18pt;
 }
 
 #top
@@ -120,9 +121,22 @@ body
 .ui.ribbon.label
 {
 	font-size: 18pt;
-	left: -3.5rem;
+	left: -3.3rem;
 	padding-left: 3rem;
 	box-shadow: 1px 4px 7px rgba(0, 0, 0, 0.5);
+}
+
+#info p
+{
+	text-align: center;
+}
+
+#info .preface
+{
+	text-align: center;
+	font-style: italic;
+	line-height: 40pt;
+	font-size: 22pt;
 }
 
 #staff h3 { color: #564F8A; }
