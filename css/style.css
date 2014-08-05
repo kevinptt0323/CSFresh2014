@@ -103,11 +103,18 @@ body
 	border: 1px solid #ddd;
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5) !important;
 }
-.block p
+.block p,
+.block li,
+.block a
 {
 	color: #5F4B42;
 	text-shadow: 1px 1px 5px #937647;
 	line-height: 28pt;
+	text-decoration: none;
+}
+.block a:hover
+{
+	text-decoration: underline;
 }
 
 .ui.ribbon.label
@@ -141,6 +148,11 @@ body
 	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
 	max-width: 100%;
 	max-height: 100%;
+}
+.emphasis
+{
+	font-weight: bold;
+	border-bottom: 2px dashed #5F4B42;
 }
 #guestbook .fb.comment
 {
