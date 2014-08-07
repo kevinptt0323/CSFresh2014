@@ -2,6 +2,7 @@
 require_once('include/auth.php');
 require_once('include/include.php');
 require_once('include/xajax_core/xajaxAIO.inc.php');
+session_start();
 
 $xajax = new xajax();
 $regCheck = $xajax->registerFunction('regCheck');
