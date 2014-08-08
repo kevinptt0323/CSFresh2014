@@ -40,6 +40,18 @@ jQuery(document).ready(function($) {
 				.removeClass('active');
 		}
 	});
+	$('#slides').slidesjs({
+		width: 680,
+		height: 453,
+		play: {
+			active: true,
+			auto: false,
+			interval: 4000,
+			swap: true,
+			pauseOnHover: true,
+			restartDelay: 2500
+		}
+	});
 	$('.popup').popup({
 		transition: "vertical flip"
 	});
