@@ -125,6 +125,7 @@ function check($form, &$msg) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<title>報名就對了啦</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
 	<link rel="stylesheet" href="../css/semantic.css" type="text/css"/>
 	<link rel="stylesheet" href="../css/reg_style.css" type="text/css"/>
 	<script src="../js/semantic.js"></script>
@@ -259,12 +260,14 @@ function registFailed() {
 			</div>
 		</form>
 	</div>
-	<input type="submit" value="確認" name="submit" onclick="account.submit();return false;" />
-	<input type="button" value="清除" name="clear" onclick="clearForm();" />
 					<center>
-					<div id="submit_botton" class="ui down button" type="submit">
+					<div id="submit_botton" class="ui down button" type="submit" onclick="account.submit();return false;">
 						<i class="checkmark sign icon"></i>
 						送出
+					</div>
+					<div id="clear_botton" class="ui down button" type="button" onclick="clearForm();">
+						<i class="trash icon"></i>
+						清除
 					</div>
 					</center>
 <script>
