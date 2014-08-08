@@ -256,7 +256,12 @@ function registFailed() {
 										<div class="item" data-value="XL">XL</div>
 								</div>
 						</div>
+					</div>
 				</div>
+					<div class="field">
+						<label>特殊疾病</label>
+						<input type="text" placeholder="看到值星就會愛上他的病…" name="disease">
+					</div>
 			</div>
 		</form>
 	</div>
