@@ -1,6 +1,7 @@
 #container
 {
-		width:60%;
-		margin:auto;
-		font-size:11pt;
+	font-family: "Source Han Sans Regular", "文泉驛微米黑", "微軟正黑體", Consolas, sans-serif;
+	width:60%;
+	margin:auto;
+	font-size:11pt;
 }
