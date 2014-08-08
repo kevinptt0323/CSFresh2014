@@ -2,7 +2,7 @@ var staff =
 {
 	data : "",
 	init : function() {
-		$.getJSON("javascript/staff.json", function(json) {
+		$.getJSON("js/staff.json", function(json) {
 			staff.data = json;
 		}).done(function() { staff.output(); });
 	},
