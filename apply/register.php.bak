@@ -14,7 +14,6 @@ if( isset($_POST['name']) ) $username = $_POST['name'];
 else $username = "";
 
 function regCheck($form) {
-
 	$success = false;
 	$objRes = new xajaxResponse();
 	$msg = "";
@@ -46,7 +45,6 @@ function regCheck($form) {
 	}
 	$objRes->assign('regMsg', 'innerHTML' , $msg);
 	if( $success ) $objRes->call("registSucceeded");
-	else $objRes->call("registFailed");
 	return $objRes;
 }
 function checkIDNum($id) {
@@ -119,15 +117,11 @@ function check($form, &$msg) {
 	}
 }
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-	<title>報名就對了啦</title>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
-	<link rel="stylesheet" href="../css/semantic.css" type="text/css"/>
-	<link rel="stylesheet" href="../css/reg_style.css" type="text/css"/>
-	<script src="../js/semantic.js"></script>
+	<title>新增使用者</title>
 	<script type="text/javascript" src="<?php echo ROOT; ?>register.js"></script>
 	<script tpye="text/javascript">
 /* <![CDATA[ */
@@ -139,138 +133,86 @@ var account = {
 	}
 }
 function registSucceeded() {
-	$('#regMsg').removeClass('error').addClass('positive');
 	console.log("regist succeeded");
-}
-function registFailed() {
-	$('#regMsg').removeClass('positive').addClass('error');
-	console.log("regist failed");
 }
 /* ]]> */
 	</script>
 	<?php $xajax->printJavascript(ROOT.'include'); ?>
+	<link rel="stylesheet" type="text/css" href="<?php echo ROOT; ?>register.css?v=<?php echo currentVersion?>" />
+	<style type="text/css">
+<!--
+#container {
+}
+#registerForm {
+	text-align: center;
+}
+#registerForm input[type="text"],
+#registerForm input[type="password"],
+#registerForm select {
+	width: 200px;
+}
+#registerForm > table {
+	border: none;
+	margin: auto;
+}
+#registerForm > table tr {
+	height: 40px;
+}
+#registerForm > table td:first-child { text-align: right; }
+.msg {
+	color: #f00;
+	font-weight: bold;
+}
+#regMsg {
+	height: 40px;
+}
+-->
+	</style>
 </head>
-<body>
-	<div id="container" class="container">
-		<div class="ui ignored info message">
-			<p>請輸入你的資料~</p>
-		</div>
-		<div class="ui ignored message" id="regMsg">
-		</div>
-		<form class="ui form segment" id="registerForm" method="POST" action="<?php echo ROOT; ?>">
-			<div id="frm" class="frm">
-				<div class="three fields">
-					<div class="field">
-						<label>姓名</label>
-						<input name="name" placeholder="請輸入真實姓名" type="TEXT">
-					</div>
-					<div class="field">
-						<label>生日</label>
-						<input name="birthday" placeholder="YYYY/MM/DD,ex:1995/01/01" type="TEXT">
-					</div>
-					<div class="four wide field">
-						<label>我是</label>
-						<div class="ui dropdown selection">
-								<input name='gender' type="hidden">
-								<div class="default text">...</div>
-								<i class="dropdown icon"></i>
-								<div class="menu">
-										<div class="item" data-value="M">帥哥</div>
-										<div class="item" data-value="F">正咩</div>
-								</div>
-						</div>
-					</div>
-				</div>
-				<div class="two fields">
-						<div class="six wide field">
-								<label>學號</label>
-								<input name="studentID" placeholder="請輸入學號" type="TEXT">
-						</div>
-						<div class="ten wide field">
-								<label>E-mail</label>
-								<input name="email" placeholder="請輸入email" type="TEXT">
-						</div>
-				</div>
-				<div class="two fields">
-						<div class="six wide field">
-								<label>身份證字號</label>
-								<input name="idnum" placeholder="首位大寫，A123456789" type="TEXT">
-						</div>
-						<div class="ten wide field">
-								<label>地址</label>
-								<input name="idnum" placeholder="你家住哪啊?" type="TEXT">
-						</div>
-				</div>
-				<div class="four fields">
-						<div class="five wide field">
-								<label>家裡電話</label>
-								<input name="telephone" placeholder="03-5712121" type="TEXT">
-						</div>
-						<div class="three wide field">
-								<label>緊急聯絡人</label>
-								<input name="emergency_cont" placeholder="" type="TEXT">
-						</div>
-						<div class="three wide field">
-								<label>關係</label>
-								<input name="relation" placeholder="" type="TEXT">
-						</div>
-						<div class="five wide field">
-								<label>緊急聯絡人電話</label>
-								<input name="emergency_tel" placeholder="0912-345678" type="TEXT">
-						</div>
-				</div>
-				<div class="five fields">
-						<div class="four wide field">
-							<label>血型(特殊血請註明)</label>
-							<input name="bloodtype" placeholder="A/B/AB/O/其它" type="TEXT">
-						</div>
-						<div class="three wide field" align="center">
-							<label>飲食習慣</label>
-								<div class="ui radio checkbox">
-									<input name="food" value="meat" type="RADIO">
-									<label>肉食性</label>
-								</div>
-						</div>
-						<div class="two wide field">
-								<label><br></label>
-								<div class="ui radio checkbox">
-									<input name="food" value="veg" type="RADIO">
-									<label>草食性</label>
-								</div>
-						</div>
-						<div class="five wide field">
-							<label>畢業高中</label>
-							<input name="graduation" placeholder="ex：師大附中/台中女中" type="TEXT">
-						</div>
-					<div class="two wide field">
-						<label>營服尺吋</label>
-						<div class="ui dropdown selection">
-								<input name="size" type="hidden">
-								<div class="default text">...</div>
-								<i class="dropdown icon"></i>
-								<div class="menu">
-										<div class="item" data-value="S">S</div>
-										<div class="item" data-value="M">M</div>
-										<div class="item" data-value="L">L</div>
-										<div class="item" data-value="XL">XL</div>
-								</div>
-						</div>
-				</div>
-			</div>
-		</form>
-	</div>
-	<input type="submit" value="確認" name="submit" onclick="account.submit();return false;" />
-	<input type="button" value="清除" name="clear" onclick="clearForm();" />
-					<center>
-					<div id="submit_botton" class="ui down button" type="submit">
-						<i class="checkmark sign icon"></i>
-						送出
-					</div>
-					</center>
-<script>
-	$('.ui.dropdown').dropdown() ;
-	$('.ui.checkbox').checkbox() ;
 
-</script>
+<body>
+
+<div id="container">
+<form id="registerForm" action="<?php echo ROOT; ?>index.php" method="POST">
+<div class="msg" id="regMsg"></div>
+<table>
+	<tr>
+		<td>帳號：</td>
+		<td><input type="text" name="username" size="20" placeholder="請輸入使用者帳號" autocomplete="off" tabindex="1" value="<?php echo $username ?>" /></td>
+	</tr>
+	<tr>
+		<td>密碼：</td>
+		<td><input type="password" id="passwd" placeholder="請輸入密碼" tabindex="2" /></td>
+	</tr>
+	<tr>
+		<td>請再次輸入密碼：</td>
+		<td><input type="password" id="passwdChk" placeholder="再輸入一次" tabindex="3" /></td>
+	</tr>
+	<tr>
+		<td>e-mail：</td>
+		<td><input type="text" name="email" size="128" placeholder="請輸入e-mail" autocomplete="off" tabindex="4" /></td>
+	</tr>
+	<tr>
+		<td>姓名：</td>
+		<td><input type="text" name="name" placeholder="請輸入姓名" autocomplete="off" tabindex="5" /></td>
+	</tr>
+	<tr>
+		<td>系所：</td>
+		<td><input type="text" name="department" placeholder="請輸入系所" autocomplete="off" tabindex="6" /></td>
+	</tr>
+	<tr>
+		<td>畢業年份：</td>
+		<td>
+			<select name="graduate_year" id="graduate_year"> </select>
+		</td>
+	</tr>
+</table>
+<br />
+<input type="submit" value="確認" name="submit" onclick="account.submit();return false;" tabindex="8" />
+<input type="button" value="清除" name="clear" onclick="clearForm();" tabindex="9" />
+</form>
+</div>
+
 </body>
 </html>
+
