@@ -4,121 +4,127 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<title>報名就對了啦</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+	<link rel="stylesheet" href="css/semantic.css" type="text/css"/>
+	<link rel="stylesheet" href="css/reg_style.css" type="text/css"/>
 	<script src="js/semantic.js"></script>
-	<link rel="stylesheet" href="css/semantic.css" type="text/css" charset="utf-8"/>
 </head>
 <body>
-	<div class="content">
+	<div id="container" class="container">
 		<div class="ui ignored info message">
-			<p>請輸入你的資料~(*為必填)</p>
+			<p>請輸入你的資料~</p>
 		</div>
 		<form class="ui form segment" method="POST" action="">
-			<div class="three fields">
-				<div class="four wide field">
-					<label>姓名</label>
-					<input name="name" placeholder="請輸入真實姓名" type="TEXT">
-				</div>
-				<div class="data field">
-					<label>生日</label>
-					<input name="birthday" placeholder="YYYY/MM/DD,ex:1995/01/01" type="TEXT">
-				</div>
-				<div class="field">
-					<label>我是</label>
-					<div class="ui dropdown selection">
-							<input name='gender' type="hidden">
-							<div class="default text">...</div>
-							<i class="dropdown icon"></i>
-							<div class="menu">
-									<div class="item" data-value="M">帥哥</div>
-									<div class="item" data-value="F">正咩</div>
-							</div>
-					</div>
-				</div>
-			</div>
-			<div class="two fields">
-					<div class="four wide field">
-							<label>學號</label>
-							<input name="studentID" placeholder="請輸入學號" type="TEXT">
+			<div id="frm" class="frm">
+				<div class="three fields">
+					<div class="field">
+						<label>姓名</label>
+						<input name="name" placeholder="請輸入真實姓名" type="TEXT">
 					</div>
 					<div class="field">
-							<label>E-mail</label>
-							<input name="email" placeholder="請輸入email" type="TEXT">
-					</div>
-			</div>
-			<div class="two fields">
-					<div class="four wide field">
-							<label>身份證字號</label>
-							<input name="idnum" placeholder="首位大寫，A123456789" type="TEXT">
-					</div>
-					<div class="eight wide field">
-							<label>地址</label>
-							<input name="idnum" placeholder="你家住哪啊?" type="TEXT">
-					</div>
-			</div>
-			<div class="four fields">
-					<div class="four wide field">
-							<label>家裡電話</label>
-							<input name="telephone" placeholder="03-5712121" type="TEXT">
-					</div>
-					<div class="two wide field">
-							<label>緊急聯絡人</label>
-							<input name="emergency_cont" placeholder="" type="TEXT">
-					</div>
-					<div class="two wide field">
-							<label>關係</label>
-							<input name="relation" placeholder="" type="TEXT">
+						<label>生日</label>
+						<input name="birthday" placeholder="YYYY/MM/DD,ex:1995/01/01" type="TEXT">
 					</div>
 					<div class="four wide field">
-							<label>緊急聯絡人電話</label>
-							<input name="emergency_tel" placeholder="0912-345678" type="TEXT">
+						<label>我是</label>
+						<div class="ui dropdown selection">
+								<input name='gender' type="hidden">
+								<div class="default text">...</div>
+								<i class="dropdown icon"></i>
+								<div class="menu">
+										<div class="item" data-value="M">帥哥</div>
+										<div class="item" data-value="F">正咩</div>
+								</div>
+						</div>
 					</div>
-			</div>
-			<div class="five fields">
+				</div>
+				<div class="two fields">
+						<div class="six wide field">
+								<label>學號</label>
+								<input name="studentID" placeholder="請輸入學號" type="TEXT">
+						</div>
+						<div class="ten wide field">
+								<label>E-mail</label>
+								<input name="email" placeholder="請輸入email" type="TEXT">
+						</div>
+				</div>
+				<div class="two fields">
+						<div class="six wide field">
+								<label>身份證字號</label>
+								<input name="idnum" placeholder="首位大寫，A123456789" type="TEXT">
+						</div>
+						<div class="ten wide field">
+								<label>地址</label>
+								<input name="idnum" placeholder="你家住哪啊?" type="TEXT">
+						</div>
+				</div>
+				<div class="four fields">
+						<div class="five wide field">
+								<label>家裡電話</label>
+								<input name="telephone" placeholder="03-5712121" type="TEXT">
+						</div>
+						<div class="three wide field">
+								<label>緊急聯絡人</label>
+								<input name="emergency_cont" placeholder="" type="TEXT">
+						</div>
+						<div class="three wide field">
+								<label>關係</label>
+								<input name="relation" placeholder="" type="TEXT">
+						</div>
+						<div class="five wide field">
+								<label>緊急聯絡人電話</label>
+								<input name="emergency_tel" placeholder="0912-345678" type="TEXT">
+						</div>
+				</div>
+				<div class="five fields">
+						<div class="four wide field">
+							<label>血型(特殊血請註明)</label>
+							<input name="bloodtype" placeholder="A/B/AB/O/其它" type="TEXT">
+						</div>
+						<div class="three wide field" align="center">
+							<label>飲食習慣</label>
+								<div class="ui radio checkbox">
+									<input name="food" value="meat" type="RADIO">
+									<label>肉食性</label>
+								</div>
+						</div>
+						<div class="two wide field">
+								<label><br></label>
+								<div class="ui radio checkbox">
+									<input name="food" value="veg" type="RADIO">
+									<label>草食性</label>
+								</div>
+						</div>
+						<div class="five wide field">
+							<label>畢業高中</label>
+							<input name="graduation" placeholder="ex：師大附中/台中女中" type="TEXT">
+						</div>
 					<div class="two wide field">
-						<label>血型(特殊血請註明)</label>
-						<input name="bloodtype" placeholder="A/B/AB/O/其它" type="TEXT">
-					</div>
-					<div class="two wide field" align="center">
-						<label>飲食習慣</label>
-							<div class="ui radio checkbox">
-								<input name="food" value="meat" type="RADIO">
-								<label>肉食性</label>
-							</div>
-					</div>
-					<div class="two wide field">
-							<label><br></label>
-							<div class="ui radio checkbox">
-								<input name="food" value="veg" type="RADIO">
-								<label>草食性</label>
-							</div>
-					</div>
-					<div class="four wide field">
-						<label>畢業高中</label>
-						<input name="graduation" placeholder="ex：師大附中/台中女中" type="TEXT">
-					</div>
-				<div class="three wide field">
-					<label>營服尺吋</label>
-					<div class="ui dropdown selection">
-							<input name="size" type="hidden">
-							<div class="default text">...</div>
-							<i class="dropdown icon"></i>
-							<div class="menu">
-									<div class="item" data-value="S">S</div>
-									<div class="item" data-value="M">M</div>
-									<div class="item" data-value="L">L</div>
-									<div class="item" data-value="XL">XL</div>
-							</div>
-					</div>
+						<label>營服尺吋</label>
+						<div class="ui dropdown selection">
+								<input name="size" type="hidden">
+								<div class="default text">...</div>
+								<i class="dropdown icon"></i>
+								<div class="menu">
+										<div class="item" data-value="S">S</div>
+										<div class="item" data-value="M">M</div>
+										<div class="item" data-value="L">L</div>
+										<div class="item" data-value="XL">XL</div>
+								</div>
+						</div>
+				</div>
 			</div>
 		</form>
 	</div>
-					<div class="ui down button">
+					<center>
+					<div id="submit_botton" class="ui down button" type="submit">
 						<i class="checkmark sign icon"></i>
 						送出
 					</div>
+					</center>
 <script>
 	$('.ui.dropdown').dropdown() ;
 	$('.ui.checkbox').checkbox() ;
+
 </script>
 </body>
 </html>
