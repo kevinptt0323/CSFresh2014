@@ -29,11 +29,11 @@ else {
 }
 function makeTable($res, $act) {
 	if( $res ) {
-		$list = '<table><tr>';
+		$list = '<table>' . "\n" . '<tr>';
 		while( $field = $res->fetch_field() ) $list .= '<th>' . $field->name . '</th>';
 		if( $act=="app" ) $list .= '<th></th><th></th><th></th>';
 		else if( $act=="pay" ) $list .= '<th></th>';
-		$list .= '</tr>';
+		$list .= '</tr>' . "\n";
 		while( $row = $res->fetch_array() ){
 				$list .= '<tr>';
 				for($i=0; $i<$res->field_count; $i++) $list .= '<td>' . $row[$i] . '</td>';
@@ -50,8 +50,8 @@ function makeTable($res, $act) {
 				}
 				$list .= '</tr>' . "\n";
 		}
-		$list .= '</table>';
-		$list .= '<p>資料共 ' . $res->num_rows . ' 筆</p>';
+		$list .= '</table>' . "\n";
+		$list .= '<p>資料共 ' . $res->num_rows . ' 筆</p>' . "\n";
 	}
 	else
 		$list = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
@@ -64,12 +64,11 @@ function makeTable($res, $act) {
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>管理者模式</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js?ver=2.0.3"></script>
-	<link type="text/css" rel="stylesheet" href="style.css" />
-	<style type="text/css">
-<!--
-
--->
-	</style>
+	<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="../css/semantic.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/admin.css" />
+	<script type="text/javascript" src="../js/semantic.js"></script>
+	<script type="text/javascript" src="admin.js"></script>
 </head>
 
 <body>
