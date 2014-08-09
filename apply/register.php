@@ -13,6 +13,7 @@ $xajax->processRequest();
 function regCheck($form) {
 	$success = false;
 	$objRes = new xajaxResponse();
+	escape($form);
 	if( !check($form, $msg) );
 	else if( dbconn() )
 		$msg = "資料庫錯誤，請稍後再試。";
@@ -43,6 +44,30 @@ function regCheck($form) {
 	if( $success ) $objRes->call("registSucceeded");
 	else $objRes->call("registFailed");
 	return $objRes;
+}
+function check($form, &$msg) {
+	$msg = "";
+	$checking = array('name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'bloodtype', 'graduation', 'size');
+	foreach($checking as $str)
+		if( @$form[$str] == "" ) $msg = "error";
+	if( $msg != "" ) $msg = "紅框處不可為空白。";
+	else if( !filter_var($form["email"], FILTER_VALIDATE_EMAIL) )
+		$msg = "e-mail信箱格式錯誤！" . $form["email"];
+	else if( !@filter_var($form["idnum"], FILTER_CALLBACK, array("options"=>"checkIDNum")))
+		$msg = "身分證字號格式錯誤！";
+	if( $msg==="" ) return true;
+	else {
+		$msg = "輸入錯誤！<img src=\"" . ROOT . "OAO.gif\" /><br/ >" . $msg;
+		return false;
+	}
+}
+function escape(&$form) {
+	$checking = array('name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'cellphone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'disease', 'bloodtype', 'graduation', 'size', 'reason', 'expectation');
+	global $mysqli;
+	foreach($checking as $str) {
+		$form[$str] = htmlspecialchars($form[$str]);
+		$form[$str] = $mysqli->real_escape_string($form[$str]);
+	}
 }
 function checkIDNum($id) {
 	$id = strtoupper($id);
@@ -80,22 +105,6 @@ function checkIDNum($id) {
 			return true;
 		}
 	}  else {
-		return false;
-	}
-}
-function check($form, &$msg) {
-	$msg = "";
-	$checking = array('name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'bloodtype', 'graduation', 'size');
-	foreach($checking as $str)
-		if( @$form[$str] == "" ) $msg = "error";
-	if( $msg != "" ) $msg = "紅框處不可為空白。";
-	else if( !filter_var($form["email"], FILTER_VALIDATE_EMAIL) )
-		$msg = "e-mail信箱格式錯誤！";
-	else if( !@filter_var($form["idnum"], FILTER_CALLBACK, array("options"=>"checkIDNum")))
-		$msg = "身分證字號格式錯誤！";
-	if( $msg==="" ) return true;
-	else {
-		$msg = "輸入錯誤！<img src=\"" . ROOT . "OAO.gif\" /><br/ >" . $msg;
 		return false;
 	}
 }
