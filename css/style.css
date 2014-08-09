@@ -1,7 +1,7 @@
 body
 {
 	position: absolute;
-	background: url('../images/bg.jpg') repeat;
+	background: url('../images/bg.png') fixed no-repeat;
 	width: 100%;
 	min-width: 1000px;
 }
@@ -108,7 +108,7 @@ a:hover.slidesjs-stop {
 	position: relative;
 	z-index: 20;
 	top: 540px;
-	background: url('../images/bg.jpg') repeat;
+	background: url('../images/bg.png') fixed no-repeat;
 	padding-bottom: 500px;
 }
 #NavBar
