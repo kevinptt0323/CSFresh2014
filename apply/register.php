@@ -28,7 +28,7 @@ function regCheck($form) {
 			if( $result->num_rows )
 				$msg = "你已經報名過了哦！別這麼急啦^.&lt;";
 			else if( $mysqli->query($insert) ) {
-				$msg = "<span style='color:#00f'>" . $form['name'] . "，恭喜" . ($form['gender']=='M'?"你":"妳") . "報名成功！<br /><a href='.' style='color:#000'>點此返回首頁</a></span>";
+				$msg = "<span style='color:#00f'>" . $form['name'] . "，恭喜" . ($form['gender']=='M'?"你":"妳") . "報名成功！<br /><a href='../' style='color:#000'>點此返回首頁</a></span>";
 				$success = true;
 			}
 			else {
