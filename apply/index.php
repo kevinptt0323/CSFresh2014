@@ -165,11 +165,11 @@ function registFailed() {
 						<label>姓名</label>
 						<input name="name" placeholder="請輸入真實姓名" type="TEXT">
 					</div>
-					<div class="six wide field">
+					<div class="five wide field">
 						<label>生日</label>
 						<input name="birthday" placeholder="YYYY/MM/DD,ex:1995/01/01" type="TEXT">
 					</div>
-					<div class="two wide field">
+					<div class="three wide field">
 						<label>我是</label>
 						<div class="ui dropdown selection">
 								<input name='gender' type="hidden">
