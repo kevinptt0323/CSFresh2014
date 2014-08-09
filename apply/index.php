@@ -89,7 +89,6 @@ function checkIDNum($id) {
 	}
 }
 function check($form, &$msg) {
-	return true;
 	if( $form['name'] == "" )			$msg .= "姓名 ";
 	if( @$form['gender'] == "" )		$msg .= "性別 ";
 	if( @$form['studentID'] == "" )		$msg .= "學號 ";
