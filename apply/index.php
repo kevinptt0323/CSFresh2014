@@ -23,7 +23,7 @@ else $username = "";
 	<link rel="stylesheet" href="../css/reg_style.css" type="text/css"/>
 	<script src="../js/semantic.js"></script>
 	<script type="text/javascript" src="<?php echo ROOT; ?>register.js"></script>
-	<script tpye="text/javascript">
+	<script type="text/javascript">
 /* <![CDATA[ */
 var account = {
 	submit: function(passwd) {
@@ -121,7 +121,7 @@ function registFailed() {
 							<label>血型(特殊血請註明)</label>
 							<input name="bloodtype" placeholder="A/B/AB/O/其它" type="TEXT">
 						</div>
-						<div class="three wide field" align="center">
+						<div id="food" class="three wide field">
 							<label>飲食習慣</label>
 								<div class="ui radio checkbox">
 									<input name="food" value="meat" type="RADIO">
@@ -169,20 +169,18 @@ function registFailed() {
 					<label>對大學的期待</label>
 					<textarea id="expection_ta" name="expectation" placeholder="Write your expection..."></textarea>
 				</div>
-			</div>
 		</form>
 	</div>
-					<center>
-
-					<div id="submit_botton" class="ui down button" type="submit" onclick="$('#registerForm').form('validate form');account.submit();return false;" >
-						<i class="checkmark sign icon"></i>
-						送出
-					</div>
-					<div id="clear_botton" class="ui down button" type="button" onclick="clearForm();">
-						<i class="trash icon"></i>
-						清除
-					</div>
-					</center>
+<div id="button_div">
+	<div id="submit_button" class="ui down button" onclick="$('#registerForm').form('validate form');account.submit();return false;" >
+		<i class="checkmark sign icon"></i>
+		送出
+	</div>
+	<div id="clear_button" class="ui down button" onclick="clearForm();">
+		<i class="trash icon"></i>
+		清除
+	</div>
+</div>
 
 <script>
 	$('.ui.dropdown').dropdown() ;
@@ -195,7 +193,6 @@ $('#registerForm')
 		idnum:			{ identifier: 'idnum',			rules: [ { type: 'empty', } ] },
 		email:			{ identifier: 'email',			rules: [ { type: 'email', } ] },
 		gender:			{ identifier: 'gender',			rules: [ { type: 'empty', } ] },
-		cellphone:	{ identifier: 'cellphone',	rules: [ { type: 'empty', } ] },
 		telephone:	{ identifier: 'telephone',	rules: [ { type: 'empty', } ] },
 		address:		{ identifier: 'address',		rules: [ { type: 'empty', } ] },
 		emergency_cont:		{ identifier: 'emergency_cont',		rules: [ { type: 'empty', } ] },
