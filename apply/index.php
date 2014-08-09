@@ -279,8 +279,8 @@ function registFailed() {
 		</form>
 	</div>
 					<center>
-<!--onclick="account.submit();return false;"-->
-					<div id="submit_botton" class="ui down button" type="submit" >
+
+					<div id="submit_botton" class="ui down button" type="submit" onclick="$('#registerForm').form('validate form');account.submit();return false;" >
 						<i class="checkmark sign icon"></i>
 						送出
 					</div>
@@ -293,6 +293,19 @@ function registFailed() {
 <script>
 	$('.ui.dropdown').dropdown() ;
 	$('.ui.checkbox').checkbox() ;
+$('#registerForm')
+  .form({
+    firstName: {
+      identifier : 'name',
+      rules: [
+        {
+          type   : 'empty',
+          prompt : 'Please enter your first name'
+        }
+      ]
+    }
+})
+
 </script>
 </body>
 </html>
