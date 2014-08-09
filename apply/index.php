@@ -295,7 +295,7 @@ function registFailed() {
 	$('.ui.checkbox').checkbox() ;
 $('#registerForm')
   .form({
-    firstName: {
+    name: {
       identifier : 'name',
       rules: [
         {
@@ -303,7 +303,8 @@ $('#registerForm')
           prompt : 'Please enter your first name'
         }
       ]
-    }
+		},
+
 })
 
 </script>
