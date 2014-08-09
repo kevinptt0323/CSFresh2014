@@ -4,14 +4,11 @@ require_once('include/include.php');
 require_once('include/xajax_core/xajaxAIO.inc.php');
 session_start();
 
-$xajax = new xajax();
+$xajax = new xajax("register.php");
 $regCheck = $xajax->registerFunction('regCheck');
 $regCheck->useSingleQuote();
 $regCheck->addParameter(XAJAX_FORM_VALUES, 'registerForm');
 $xajax->processRequest();
-
-if( isset($_POST['name']) ) $username = $_POST['name'];
-else $username = "";
 
 function regCheck($form) {
 	$success = false;
@@ -22,22 +19,22 @@ function regCheck($form) {
 		$msg = "資料庫錯誤，請稍後再試。";
 	else {
 		global $mysqli;
-		$query = "SELECT * FROM `Applications` WHERE `name` = '$form[name]' LIMIT 1;";
-		/*$insert = "INSERT INTO `Applications` (
-`name`, `gender`, `studentID`, `address`, `email`, `idnum`, `birthday`, `telephone`, `cellphone`, `emergency_cont`, `relation`, `emergency_tel`, `food`, `disease`, `bloodtype`, `graduation`, `size`, `reason`, `expection`
+		$query = "SELECT * FROM `Applications` WHERE `idnum` = '$form[idnum]' LIMIT 1;";
+		$insert = "INSERT INTO `Applications` (
+`name`, `gender`, `studentID`, `address`, `email`, `idnum`, `birthday`, `telephone`, `cellphone`, `emergency_cont`, `relation`, `emergency_tel`, `food`, `disease`, `bloodtype`, `graduation`, `size`, `reason`, `expectation`, `payment`
 ) VALUES (
-'$form[name]', '$form[gender]', '$form[studentID]', '$form[address]', '$form[email]', '$form[idnum]', '$form[birthday]', '$form[telephone]', '$form[cellphone]', '$form[emergency_cont]', '$form[relation]', '$form[emergency_tel]', '$form[food]', '$form[disease]', '$form[bloodtype]', '$form[graduation]', '$form[size]', '$form[reason]', '$form[expection]'
-)";*/
+'$form[name]', '$form[gender]', '$form[studentID]', '$form[address]', '$form[email]', '$form[idnum]', '$form[birthday]', '$form[telephone]', '$form[cellphone]', '$form[emergency_cont]', '$form[relation]', '$form[emergency_tel]', '$form[food]', '$form[disease]', '$form[bloodtype]', '$form[graduation]', '$form[size]', '$form[reason]', '$form[expectation]', 0
+)";
 		if( $result = $mysqli->query($query) ) {
 			if( $result->num_rows )
 				$msg = "你已經報名過了哦！別這麼急啦^.&lt;";
-			/*else if( $mysqli->query($insert) ) {
-				$msg = "<span style='color:#00f'>成功報名！<br /><a href='.' style='color:#000'>點此返回首頁</a></span>";
+			else if( $mysqli->query($insert) ) {
+				$msg = "<span style='color:#00f'>" . $form['name'] . "，恭喜" . ($form['gender']=='M'?"你":"妳") . "報名成功！<br /><a href='.' style='color:#000'>點此返回首頁</a></span>";
 				$success = true;
-			}*/
+			}
 			else {
-				$msg =  "暫時不開放報名唷～";
-				//$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+				//$msg =  "暫時不開放報名唷～";
+				$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
 			}
 		}
 		else
@@ -45,6 +42,7 @@ function regCheck($form) {
 	}
 	$objRes->assign('regMsg', 'innerHTML' , $msg);
 	if( $success ) $objRes->call("registSucceeded");
+	else $objRes->call("registFailed");
 	return $objRes;
 }
 function checkIDNum($id) {
@@ -83,11 +81,10 @@ function checkIDNum($id) {
 			return true;
 		}
 	}  else {
-	   return false;
+		return false;
 	}
 }
 function check($form, &$msg) {
-	return true;
 	if( $form['name'] == "" )			$msg .= "姓名 ";
 	if( @$form['gender'] == "" )		$msg .= "性別 ";
 	if( @$form['studentID'] == "" )		$msg .= "學號 ";
@@ -108,8 +105,6 @@ function check($form, &$msg) {
 		$msg = "e-mail信箱格式錯誤！";
 	else if( !@filter_var($form["idnum"], FILTER_CALLBACK, array("options"=>"checkIDNum")))
 		$msg = "身分證字號格式錯誤！";
-	else if( !is_numeric($form["graduate_year"]) )
-		$msg = "畢業年份必須為數字！";
 	if( $msg==="" ) return true;
 	else {
 		$msg = "輸入錯誤！<img src=\"" . ROOT . "OAO.gif\" /><br/ >" . $msg;
