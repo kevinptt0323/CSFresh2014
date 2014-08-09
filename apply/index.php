@@ -140,11 +140,11 @@ var account = {
 	}
 }
 function registSucceeded() {
-	$('#regMsg').removeClass('error').addClass('positive');
+	$('#regMsg').removeClass('info').removeClass('error').addClass('positive');
 	console.log("regist succeeded");
 }
 function registFailed() {
-	$('#regMsg').removeClass('positive').addClass('error');
+	$('#regMsg').removeClass('info').removeClass('positive').addClass('error');
 	console.log("regist failed");
 }
 /* ]]> */
@@ -153,10 +153,8 @@ function registFailed() {
 </head>
 <body>
 	<div id="container" class="container">
-		<div class="ui ignored info message">
+		<div class="ui ignored info message" id="regMsg">
 			<p>請輸入你的資料~</p>
-		</div>
-		<div class="ui ignored message" id="regMsg">
 		</div>
 		<form class="ui form segment" name="registerForm" id="registerForm" method="POST" action="<?php echo ROOT; ?>">
 			<div id="frm" class="frm">
@@ -167,7 +165,7 @@ function registFailed() {
 					</div>
 					<div class="six wide field">
 						<label>生日</label>
-						<input name="birthday" placeholder="YYYY/MM/DD,ex:1995/01/01" type="TEXT">
+						<input name="birthday" placeholder="YYYY/MM/DD，ex:1995/03/23" type="TEXT">
 					</div>
 					<div class="two wide field">
 						<label>我是</label>
@@ -248,16 +246,18 @@ function registFailed() {
 							<input name="graduation" placeholder="ex：師大附中/台中女中" type="TEXT">
 						</div>
 					<div class="two wide field">
-						<label>營服尺吋</label>
+						<label>營服尺寸</label>
 						<div class="ui dropdown selection">
 								<input name="size" type="hidden">
 								<div class="default text">...</div>
 								<i class="dropdown icon"></i>
 								<div class="menu">
+										<div class="item" data-value="XS">XS</div>
 										<div class="item" data-value="S">S</div>
 										<div class="item" data-value="M">M</div>
 										<div class="item" data-value="L">L</div>
 										<div class="item" data-value="XL">XL</div>
+										<div class="item" data-value="2L">2L</div>
 								</div>
 						</div>
 					</div>
