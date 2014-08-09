@@ -13,7 +13,6 @@ $xajax->processRequest();
 function regCheck($form) {
 	$success = false;
 	$objRes = new xajaxResponse();
-	$msg = "";
 	if( !check($form, $msg) );
 	else if( dbconn() )
 		$msg = "資料庫錯誤，請稍後再試。";
@@ -85,22 +84,11 @@ function checkIDNum($id) {
 	}
 }
 function check($form, &$msg) {
-	if( $form['name'] == "" )			$msg .= "姓名 ";
-	if( @$form['gender'] == "" )		$msg .= "性別 ";
-	if( @$form['studentID'] == "" )		$msg .= "學號 ";
-	if( @$form['address'] == "" )		$msg .= "住址 ";
-	if( @$form['email'] == "" )			$msg .= "e-mail ";
-	if( @$form['idnum'] == "" )			$msg .= "身分證字號 ";
-	if( @$form['birthday'] == "" )		$msg .= "生日 ";
-	if( @$form['telephone'] == "" )		$msg .= "連絡電話(家) ";
-	if( @$form['emergency_cont'] == "" ) $msg .= "緊急連絡人 ";
-	if( @$form['relation'] == "" )		$msg .= "關係 ";
-	if( @$form['emergency_tel'] == "" )	$msg .= "緊急連絡人電話 ";
-	if( @$form['food'] == "" )			$msg .= "飲食習慣 ";
-	if( @$form['bloodtype'] == "" )		$msg .= "血型 ";
-	if( @$form['graduation'] == "" )	$msg .= "畢業高中 ";
-	if( @$form['size'] == "" )			$msg .= "營服尺寸 ";
-	if( @$msg != "" ) $msg = $msg . "不可為空白。";
+	$msg = "";
+	$checking = array('name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'bloodtype', 'graduation', 'size');
+	foreach($checking as $str)
+		if( @$form[$str] == "" ) $msg = "error";
+	if( $msg != "" ) $msg = "紅框處不可為空白。";
 	else if( !filter_var($form["email"], FILTER_VALIDATE_EMAIL) )
 		$msg = "e-mail信箱格式錯誤！";
 	else if( !@filter_var($form["idnum"], FILTER_CALLBACK, array("options"=>"checkIDNum")))
