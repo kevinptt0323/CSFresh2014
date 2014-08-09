@@ -23,22 +23,22 @@ function regCheck($form) {
 		$msg = "資料庫錯誤，請稍後再試。";
 	else {
 		global $mysqli;
-		$query = "SELECT * FROM `Applications` WHERE `name` = '$form[name]' LIMIT 1;";
-		/*$insert = "INSERT INTO `Applications` (
-`name`, `gender`, `studentID`, `address`, `email`, `idnum`, `birthday`, `telephone`, `cellphone`, `emergency_cont`, `relation`, `emergency_tel`, `food`, `disease`, `bloodtype`, `graduation`, `size`, `reason`, `expection`
+		$query = "SELECT * FROM `Applications` WHERE `idnum` = '$form[idnum]' LIMIT 1;";
+		$insert = "INSERT INTO `Applications` (
+`name`, `gender`, `studentID`, `address`, `email`, `idnum`, `birthday`, `telephone`, `cellphone`, `emergency_cont`, `relation`, `emergency_tel`, `food`, `disease`, `bloodtype`, `graduation`, `size`, `reason`, `expectation`
 ) VALUES (
-'$form[name]', '$form[gender]', '$form[studentID]', '$form[address]', '$form[email]', '$form[idnum]', '$form[birthday]', '$form[telephone]', '$form[cellphone]', '$form[emergency_cont]', '$form[relation]', '$form[emergency_tel]', '$form[food]', '$form[disease]', '$form[bloodtype]', '$form[graduation]', '$form[size]', '$form[reason]', '$form[expection]'
-)";*/
+'$form[name]', '$form[gender]', '$form[studentID]', '$form[address]', '$form[email]', '$form[idnum]', '$form[birthday]', '$form[telephone]', '$form[cellphone]', '$form[emergency_cont]', '$form[relation]', '$form[emergency_tel]', '$form[food]', '$form[disease]', '$form[bloodtype]', '$form[graduation]', '$form[size]', '$form[reason]', '$form[expectation]'
+)";
 		if( $result = $mysqli->query($query) ) {
 			if( $result->num_rows )
 				$msg = "你已經報名過了哦！別這麼急啦^.&lt;";
-			/*else if( $mysqli->query($insert) ) {
+			else if( $mysqli->query($insert) ) {
 				$msg = "<span style='color:#00f'>成功報名！<br /><a href='.' style='color:#000'>點此返回首頁</a></span>";
 				$success = true;
-			}*/
+			}
 			else {
-				$msg =  "暫時不開放報名唷～";
-				//$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+				//$msg =  "暫時不開放報名唷～";
+				$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
 			}
 		}
 		else
@@ -109,8 +109,6 @@ function check($form, &$msg) {
 		$msg = "e-mail信箱格式錯誤！";
 	else if( !@filter_var($form["idnum"], FILTER_CALLBACK, array("options"=>"checkIDNum")))
 		$msg = "身分證字號格式錯誤！";
-	else if( !is_numeric($form["graduate_year"]) )
-		$msg = "畢業年份必須為數字！";
 	if( $msg==="" ) return true;
 	else {
 		$msg = "輸入錯誤！<img src=\"" . ROOT . "OAO.gif\" /><br/ >" . $msg;
@@ -140,6 +138,7 @@ var account = {
 }
 function registSucceeded() {
 	$('#regMsg').removeClass('info').removeClass('error').addClass('positive');
+	clearForm();
 	console.log("regist succeeded");
 }
 function registFailed() {
@@ -173,8 +172,8 @@ function registFailed() {
 								<div class="default text">...</div>
 								<i class="dropdown icon"></i>
 								<div class="menu">
-										<div class="item" data-value="M">帥哥</div>
-										<div class="item" data-value="F">正咩</div>
+										<div class="item" data-value="M">帥哥(男)</div>
+										<div class="item" data-value="F">正咩(女)</div>
 								</div>
 						</div>
 					</div>
@@ -200,7 +199,7 @@ function registFailed() {
 						</div>
 						<div class="eleven wide field">
 								<label>地址</label>
-								<input name="idnum" placeholder="你家住哪啊?" type="TEXT">
+								<input name="address" placeholder="你家住哪啊?" type="TEXT">
 						</div>
 				</div>
 				<div class="four fields">
@@ -272,7 +271,7 @@ function registFailed() {
 				</div>
 				<div class="field">
 					<label>對大學的期待</label>
-					<textarea id="expection_ta" name="expection" placeholder="Write your expection..."></textarea>
+					<textarea id="expection_ta" name="expectation" placeholder="Write your expection..."></textarea>
 				</div>
 			</div>
 		</form>
