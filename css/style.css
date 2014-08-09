@@ -29,9 +29,15 @@ body
 {
 	margin: auto;
 	width: 680px;
+	border-radius: 20px;
+}
+.slidesjs-container
+{
+	border-radius: 20px;
+	box-shadow: 0 0 5px #000;
 }
 .slidesjs-pagination {
-	margin: 8px 0 0;
+	margin: 8px 10px 0;
 	float: right;
 	list-style: none;
 }
@@ -68,8 +74,7 @@ a.slidesjs-stop {
 	overflow: hidden;
 	text-indent: -9999px;
 	float: left;
-	margin-right: 5px;
-	margin-top: 5px;
+	margin: 7px 0 0 20px;
 }
 a.slidesjs-next {
 	margin-right:10px;
