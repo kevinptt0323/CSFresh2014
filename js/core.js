@@ -22,6 +22,22 @@ var staff =
 jQuery(document).ready(function($) {
 	staff.init();
 	var $NavBar = $('#NavBar'), NavOffset = $NavBar.offset().top;
+	if($(window).scrollTop() > NavOffset) {
+		$NavBar
+			.removeClass('item')
+			.addClass('Float')
+			.addClass('secondary')
+			.addClass('vertical');
+	}
+	else {
+		$NavBar
+			.addClass('item')
+			.removeClass('Float')
+			.removeClass('secondary')
+			.removeClass('vertical')
+			.children('.item')
+			.removeClass('active');
+	}
 	$(window).scroll(function () {
 		if($(this).scrollTop() > NavOffset) {
 			$NavBar
