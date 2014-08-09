@@ -183,31 +183,31 @@ function registFailed() {
 					</div>
 				</div>
 				<div class="two fields">
-					<div class="five wide field">
+					<div class="four wide field">
 							<label>身份證字號</label>
 							<input name="idnum" placeholder="首位大寫，A123456789" type="TEXT">
 					</div>
-					<div class="eleven wide field">
+					<div class="twelve wide field">
 							<label>E-mail</label>
 							<input name="email" placeholder="請輸入email" type="TEXT">
 					</div>
 				</div>
 				<div class="two fields">
-						<div class="five wide field">
+						<div class="four wide field">
 								<label>手機</label>
 								<input name="cellphone" placeholder="0912-345678" type="TEXT">
 						</div>
-						<div class="eleven wide field">
+						<div class="twelve wide field">
 								<label>地址</label>
 								<input name="address" placeholder="你家住哪啊?" type="TEXT">
 						</div>
 				</div>
 				<div class="four fields">
-						<div class="five wide field">
+						<div class="four wide field">
 								<label>家裡電話</label>
 								<input name="telephone" placeholder="03-5712121" type="TEXT">
 						</div>
-						<div class="three wide field">
+						<div class="four wide field">
 								<label>緊急聯絡人</label>
 								<input name="emergency_cont" placeholder="" type="TEXT">
 						</div>
@@ -292,16 +292,23 @@ function registFailed() {
 	$('.ui.dropdown').dropdown() ;
 	$('.ui.checkbox').checkbox() ;
 $('#registerForm')
-  .form({
-    name: {
-      identifier : 'name',
-      rules: [
-        {
-          type   : 'empty',
-          prompt : 'Please enter your first name'
-        }
-      ]
-		},
+		.form({
+				name: 	{ identifier: 'name',				rules: [ { type: 'empty', } ] },
+		birthday:		{ identifier: 'birthday',		rules: [ { type: 'empty', } ] },
+		studentID:	{ identifier: 'studentID',	rules: [ { type: 'empty', } ] },
+		idnum:			{ identifier: 'idnum',			rules: [ { type: 'empty', } ] },
+		email:			{ identifier: 'email',			rules: [ { type: 'email', } ] },
+		gender:			{ identifier: 'gender',			rules: [ { type: 'empty', } ] },
+		cellphone:	{ identifier: 'cellphone',	rules: [ { type: 'empty', } ] },
+		telephone:	{ identifier: 'telephone',	rules: [ { type: 'empty', } ] },
+		address:		{ identifier: 'address',		rules: [ { type: 'empty', } ] },
+		emergency_cont:		{ identifier: 'emergency_cont',		rules: [ { type: 'empty', } ] },
+		emergency_tel:		{ identifier: 'emergency_tel',		rules: [ { type: 'empty', } ] },
+		relation:		{ identifier: 'relation',		rules: [ { type: 'empty', } ] },
+		bloodtype:	{ identifier: 'bloodtype',	rules: [ { type: 'empty', } ] },
+		graduation:	{ identifier: 'graduation',	rules: [ { type: 'empty', } ] },
+		size:				{ identifier: 'size',				rules: [ { type: 'empty', } ] },
+		food:				{ identifier: 'food',				rules: [ { type: 'checked', } ] },
 
 })
 
