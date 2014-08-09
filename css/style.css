@@ -19,6 +19,7 @@ body
 #top
 {
 	position: fixed;
+	z-index: 10;
 	top: 40px;
 	width: 80%;
 	margin: auto;
@@ -100,6 +101,7 @@ a:hover.slidesjs-stop {
 #bottom
 {
 	position: relative;
+	z-index: 20;
 	top: 540px;
 	background: url('../images/bg.jpg') repeat;
 	padding-bottom: 500px;
