@@ -3,7 +3,11 @@ require_once('include/auth.php');
 require_once('include/include.php');
 session_start();
 
-if( isset($_GET['howdoyouturnthison']) || isset($_SESSION['login']) && isset($_SESSION['admin']) ) {
+if( isset($_GET['howdoyouturnthison']) )
+	$_SESSION['godmode'] = true;
+else if( isset($_GET['logout']) )
+	$_SESSION['godmode'] = false;
+if( ( isset($_SESSION['godmode']) && $_SESSION['godmode'] ) || ( isset($_SESSION['login']) && isset($_SESSION['admin']) ) ) {
 	if( dbconn() )
 		die("資料庫錯誤，請稍後再試。");
 	else {
@@ -20,12 +24,18 @@ if( isset($_GET['howdoyouturnthison']) || isset($_SESSION['login']) && isset($_S
 									ORDER BY a.time ASC";
 				$content = makeTable($mysqli->query($query), "");
 				break;
+			case 'insurance':
+				$query = "SELECT `name` AS '姓名', `gender` AS '性別', `idnum` AS '身分證字號', `birthday` AS '生日',
+								`emergency_cont` AS '緊急連絡人', `relation` AS '關係', `emergency_tel` AS '緊急連絡電話'
+								FROM `Applications` ORDER BY `aid` ASC";
+				$content = makeTable($mysqli->query($query), "");
+				break;
 		}
 	}
 }
 else {
-	die();
 	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/\" />\n";
+	die();
 }
 function makeTable($res, $act) {
 	if( $res ) {
@@ -73,7 +83,9 @@ function makeTable($res, $act) {
 
 <body>
 <div class="container">
-	<div class="nav"></div>
+	<div class="nav">
+		<a href="?">所有報名資訊</a> | <a href="?q=insurance">保險資料</a> | <a href="?logout">登出</a>
+	</div>
 	<div class="content">
 <?php echo $content; ?>
 	</div>
