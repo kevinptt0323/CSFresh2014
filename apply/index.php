@@ -172,17 +172,16 @@ function registFailed() {
 			</div>
 		</form>
 	</div>
-					<center>
-
-					<div id="submit_botton" class="ui down button" type="submit" onclick="$('#registerForm').form('validate form');account.submit();return false;" >
-						<i class="checkmark sign icon"></i>
-						送出
-					</div>
-					<div id="clear_botton" class="ui down button" type="button" onclick="clearForm();">
-						<i class="trash icon"></i>
-						清除
-					</div>
-					</center>
+<div id="button_div">
+	<div id="submit_button" class="ui down button" type="submit" onclick="$('#registerForm').form('validate form');account.submit();return false;" >
+		<i class="checkmark sign icon"></i>
+		送出
+	</div>
+	<div id="clear_button" class="ui down button" type="button" onclick="clearForm();">
+		<i class="trash icon"></i>
+		清除
+	</div>
+</div>
 
 <script>
 	$('.ui.dropdown').dropdown() ;
@@ -195,7 +194,6 @@ $('#registerForm')
 		idnum:			{ identifier: 'idnum',			rules: [ { type: 'empty', } ] },
 		email:			{ identifier: 'email',			rules: [ { type: 'email', } ] },
 		gender:			{ identifier: 'gender',			rules: [ { type: 'empty', } ] },
-		cellphone:	{ identifier: 'cellphone',	rules: [ { type: 'empty', } ] },
 		telephone:	{ identifier: 'telephone',	rules: [ { type: 'empty', } ] },
 		address:		{ identifier: 'address',		rules: [ { type: 'empty', } ] },
 		emergency_cont:		{ identifier: 'emergency_cont',		rules: [ { type: 'empty', } ] },
