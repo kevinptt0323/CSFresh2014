@@ -85,7 +85,7 @@ function checkIDNum($id) {
 			return true;
 		}
 	}  else {
-	   return false;
+		return false;
 	}
 }
 function check($form, &$msg) {
@@ -123,7 +123,7 @@ function check($form, &$msg) {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-	<title>報名就對了啦</title>
+	<title>宿營?報名就對了啦!</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
 	<link rel="stylesheet" href="../css/semantic.css" type="text/css"/>
@@ -158,18 +158,18 @@ function registFailed() {
 		</div>
 		<div class="ui ignored message" id="regMsg">
 		</div>
-		<form class="ui form segment" id="registerForm" method="POST" action="<?php echo ROOT; ?>">
+		<form class="ui form segment" name="registerForm" id="registerForm" method="POST" action="<?php echo ROOT; ?>">
 			<div id="frm" class="frm">
-				<div class="three fields">
+				<div class="four fields">
 					<div class="field">
 						<label>姓名</label>
 						<input name="name" placeholder="請輸入真實姓名" type="TEXT">
 					</div>
-					<div class="field">
+					<div class="six wide field">
 						<label>生日</label>
 						<input name="birthday" placeholder="YYYY/MM/DD,ex:1995/01/01" type="TEXT">
 					</div>
-					<div class="four wide field">
+					<div class="two wide field">
 						<label>我是</label>
 						<div class="ui dropdown selection">
 								<input name='gender' type="hidden">
@@ -181,23 +181,27 @@ function registFailed() {
 								</div>
 						</div>
 					</div>
+					<div class="field">
+						<label>學號</label>
+						<input name="studentID" placeholder="請輸入學號" type="TEXT">
+					</div>
 				</div>
 				<div class="two fields">
-						<div class="six wide field">
-								<label>學號</label>
-								<input name="studentID" placeholder="請輸入學號" type="TEXT">
-						</div>
-						<div class="ten wide field">
-								<label>E-mail</label>
-								<input name="email" placeholder="請輸入email" type="TEXT">
-						</div>
+					<div class="five wide field">
+							<label>身份證字號</label>
+							<input name="idnum" placeholder="首位大寫，A123456789" type="TEXT">
+					</div>
+					<div class="eleven wide field">
+							<label>E-mail</label>
+							<input name="email" placeholder="請輸入email" type="TEXT">
+					</div>
 				</div>
 				<div class="two fields">
-						<div class="six wide field">
-								<label>身份證字號</label>
-								<input name="idnum" placeholder="首位大寫，A123456789" type="TEXT">
+						<div class="five wide field">
+								<label>手機</label>
+								<input name="cellphone" placeholder="0912-345678" type="TEXT">
 						</div>
-						<div class="ten wide field">
+						<div class="eleven wide field">
 								<label>地址</label>
 								<input name="idnum" placeholder="你家住哪啊?" type="TEXT">
 						</div>
@@ -260,13 +264,23 @@ function registFailed() {
 				</div>
 					<div class="field">
 						<label>特殊疾病</label>
-						<input type="text" placeholder="看到值星就會愛上他的病…" name="disease">
+						<input type="text" placeholder="看到總召就會想捏他的病…" name="disease">
 					</div>
+				</div>
+				<div class="field">
+					<label>為什麼想來迎新宿營咧?</label>
+					<textarea id="reason_ta" name="reason" placeholder="因為聽說值星很帥呢A_A"></textarea>
+				</div>
+				<div class="field">
+					<label>對大學的期待</label>
+					<textarea id="expection_ta" name="expection" placeholder="Write your expection..."></textarea>
+				</div>
 			</div>
 		</form>
 	</div>
 					<center>
-					<div id="submit_botton" class="ui down button" type="submit" onclick="account.submit();return false;">
+<!--onclick="account.submit();return false;"-->
+					<div id="submit_botton" class="ui down button" type="submit" >
 						<i class="checkmark sign icon"></i>
 						送出
 					</div>
@@ -275,10 +289,10 @@ function registFailed() {
 						清除
 					</div>
 					</center>
+
 <script>
 	$('.ui.dropdown').dropdown() ;
 	$('.ui.checkbox').checkbox() ;
-
 </script>
 </body>
 </html>
