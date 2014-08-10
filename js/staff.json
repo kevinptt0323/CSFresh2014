@@ -1,21 +1,16 @@
 [
 	[
-		{"name":"劉昀昇", "type":1},
+		{"name":"黃璿霖", "type":1},
+		{"name":"翁瑋"  , "type":1},
 		{"name":"林芳慈", "type":2},
 		{"name":"王浩丞", "type":1},
-		{"name":"翁瑋"  , "type":1},
-		{"name":"高孟勤", "type":2},
-		{"name":"周彥廷", "type":1},
 		{"name":"孫采荷", "type":2},
-		{"name":"陳弘歷", "type":1},
-		{"name":"楊舜欽", "type":1},
-		{"name":"葉千瑋", "type":2},
 		{"name":"蔡子豪", "type":1},
-		{"name":"吳宇軒", "type":1},
-		{"name":"黃嘉眉", "type":2},
-		{"name":"黃璿霖", "type":1}
+		{"name":"周彥廷", "type":1}
 	],
 	[
+		{"name":"黃薇如", "type":2},
+		{"name":"吳宇軒", "type":1},
 		{"name":"王培霖", "type":1},
 		{"name":"許漢培", "type":1},
 		{"name":"張郁琳", "type":2},
@@ -24,34 +19,32 @@
 		{"name":"袁詩淳", "type":2},
 		{"name":"袁晟峻", "type":1},
 		{"name":"邵志宇", "type":1},
-		{"name":"吳宇軒", "type":1},
 		{"name":"黃慎航", "type":1},
 		{"name":"徐瑜秀", "type":2},
-		{"name":"余宜臻", "type":2},
-		{"name":"黃薇如", "type":2}
+		{"name":"余宜臻", "type":2}
 	
 	],
 	[
+		{"name":"葉千瑋", "type":2},
+		{"name":"黃嘉眉", "type":2},
 		{"name":"郭景雲", "type":1},
 		{"name":"孫若芙", "type":2},
 		{"name":"鄭允真", "type":2},
 		{"name":"楊鈞雅", "type":2},
-		{"name":"葉千瑋", "type":2},
 		{"name":"羅翊庭", "type":2},
 		{"name":"李孟軒", "type":2},
 		{"name":"李奕霖", "type":1},
 		{"name":"鄧雅文", "type":2},
-		{"name":"吳亭葳", "type":2},
-		{"name":"黃嘉眉", "type":2}
+		{"name":"吳亭葳", "type":2}
 	],
 	[
+		{"name":"陳弘歷", "type":1},
+		{"name":"楊舜欽", "type":1},
 		{"name":"王捷生", "type":1},
 		{"name":"簡于翔", "type":1},
 		{"name":"宋世穎", "type":1},
-		{"name":"陳弘歷", "type":1},
 		{"name":"陳政柏", "type":1},
 		{"name":"楊佳恩", "type":1},
-		{"name":"楊舜欽", "type":1},
 		{"name":"梁棋鈞", "type":1},
 		{"name":"林承緯", "type":1},
 		{"name":"賴騰可", "type":1},
@@ -60,10 +53,10 @@
 
 	],
 	[
-		{"name":"胡瑞中", "type":1},
-		{"name":"高孟勤", "type":2},
-		{"name":"劉侑鑫", "type":1},
 		{"name":"劉昀昇", "type":1},
+		{"name":"高孟勤", "type":2},
+		{"name":"胡瑞中", "type":1},
+		{"name":"劉侑鑫", "type":1},
 		{"name":"林珏廷", "type":2},
 		{"name":"莊雅筑", "type":2},
 		{"name":"洪祺堡", "type":1}
