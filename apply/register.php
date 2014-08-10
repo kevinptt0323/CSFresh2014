@@ -65,7 +65,7 @@ function escape(&$form) {
 	$checking = array('name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'cellphone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'disease', 'bloodtype', 'graduation', 'size', 'reason', 'expectation');
 	global $mysqli;
 	foreach($checking as $str) {
-		$form[$str] = htmlspecialchars($form[$str]);
+		$form[$str] = htmlspecialchars(@$form[$str]);
 		$form[$str] = $mysqli->real_escape_string($form[$str]);
 	}
 }
