@@ -1,9 +1,14 @@
+body
+{
+	background: url('../images/bg.png') fixed no-repeat;
+}
 #container
 {
 	font-family: "Source Han Sans Regular", "文泉驛微米黑", "微軟正黑體", Consolas, sans-serif;
 	width:70%;
 	margin:auto;
 	font-size:11pt;
+	padding: 10px 0;
 }
 #reason_ta
 {
@@ -22,4 +27,3 @@
 {
 	text-align:center;
 }
-
