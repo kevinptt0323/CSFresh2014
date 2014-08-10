@@ -13,22 +13,37 @@ if( ( isset($_SESSION['godmode']) && $_SESSION['godmode'] ) || ( isset($_SESSION
 	else {
 		global $mysqli;
 		$content = "";
-		if( isset($_GET['q']) ) $qq = $_GET['q'];
-		else $qq = "";
-		switch( $qq ) {
+		if( isset($_GET['q']) ) $curPage = $_GET['q'];
+		else $curPage = "";
+		switch( $curPage ) {
 			default:
 				$query = "SELECT a.aid AS '報名序號', a.time AS '時間', a.name AS '姓名', a.gender AS '性別',
 									a.payment AS '繳費方式', p.date AS '繳費日期'
 									FROM `Applications` AS `a`
 									LEFT JOIN `Payment` AS `p` ON a.aid = p.aid
 									ORDER BY a.time ASC";
-				$content = makeTable($mysqli->query($query), "");
+				$content = makeTable($mysqli->query($query), "app");
 				break;
 			case 'insurance':
 				$query = "SELECT `name` AS '姓名', `gender` AS '性別', `idnum` AS '身分證字號', `birthday` AS '生日',
 								`emergency_cont` AS '緊急連絡人', `relation` AS '關係', `emergency_tel` AS '緊急連絡電話'
 								FROM `Applications` ORDER BY `aid` ASC";
-				$content = makeTable($mysqli->query($query), "");
+				$content = makeTable($mysqli->query($query), "insurance");
+				break;
+			case 'profile':
+				$query = "SELECT `name` AS '姓名', `gender` AS '性別', `telephone` AS '電話', `cellphone` AS '手機',
+								`address` AS '地址', `graduation` AS '畢業高中', `disease` AS '特殊疾病',
+								`food` AS '飲食', `size` AS '營服尺寸'
+								FROM `Applications` ORDER BY `graduation` ASC";
+				$content = makeTable($mysqli->query($query), "profile");
+				break;
+			case 'info':
+				if( isset($_GET['aid']) && is_numeric($_GET['aid']) )
+					$aid = $_GET['aid'];
+				else
+					$aid = 0;
+				$query = "SELECT * FROM `Applications` WHERE `aid` = $aid LIMIT 1";
+				$content = makeInfo($mysqli->query($query));
 				break;
 		}
 	}
@@ -39,7 +54,7 @@ else {
 }
 function makeTable($res, $act) {
 	if( $res ) {
-		$list = '<table>' . "\n" . '<tr>';
+		$list = '<table class="ui table segment">' . "\n" . '<tr>';
 		while( $field = $res->fetch_field() ) $list .= '<th>' . $field->name . '</th>';
 		if( $act=="app" ) $list .= '<th></th><th></th><th></th>';
 		else if( $act=="pay" ) $list .= '<th></th>';
@@ -49,8 +64,8 @@ function makeTable($res, $act) {
 				for($i=0; $i<$res->field_count; $i++) $list .= '<td>' . $row[$i] . '</td>';
 				if( $act=="app" ){
 						$list .= '<td><a href="?q=info&aid='. $row['報名序號'] . '">詳細</a></td>';
-						if( $row[7] != '' )
-								$list.= '<td>登記現場繳費</td>';
+						if( 0 && $row[7] != '' )
+								$list .= '<td>登記現場繳費</td>';
 						else
 								$list .= '<td><a href="?q=mkpay&aid='. $row['報名序號'] . '">登記現場繳費</a></td>';
 						$list .= '<td><a href="javascript:del_app(' . $row['報名序號'] . ')">刪除</a></td>';
@@ -65,6 +80,33 @@ function makeTable($res, $act) {
 	}
 	else
 		$list = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+	return $list;
+}
+function makeInfo($res){
+	if( $res ) {
+		$data = $res->fetch_array();
+		$list = '<table class="ui table segment">' . "\n";
+		for($i=0; $i<$res->field_count; $i++){
+			$list .= "\t" . '<tr><td>' . $res->fetch_field_direct($i)->name . '</td>';
+			$list .= '<td>' . nl2br($data[$i]) . '</td></tr>' . "\n";
+		}
+		$list .= '</table>' . "\n";
+	}
+	else
+		$list = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+	return $list;
+}
+function generateNav($curPage) {
+	$data = [
+		["name"=>"", "alias"=>"報名資訊"],
+		["name"=>"profile", "alias"=>"個人資料"],
+		["name"=>"insurance", "alias"=>"保險資料"]
+	];
+	$list = "";
+	foreach( $data as $item ) {
+		$list .= "<a class=\"" . ($item["name"]==$curPage?"active ":"") . "item\" href=\"?q=$item[name]\">$item[alias]</a>\n";
+	}
+	$list .= "<a class=\"right item\" href=\"?logout\">登出</a>\n";
 	return $list;
 }
 ?>
@@ -82,9 +124,9 @@ function makeTable($res, $act) {
 </head>
 
 <body>
-<div class="container">
-	<div class="nav">
-		<a href="?">所有報名資訊</a> | <a href="?q=insurance">保險資料</a> | <a href="?logout">登出</a>
+<div class="container" id="main">
+	<div class="nav ui pointing menu">
+<?php echo generateNav($curPage); ?>
 	</div>
 	<div class="content">
 <?php echo $content; ?>
