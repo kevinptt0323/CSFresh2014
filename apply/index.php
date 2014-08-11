@@ -211,7 +211,7 @@ function registFailed() {
 			</div>
 		</form>
 		<div id="button_div">
-			<div class="ui down button" onclick="account.submit();return false;" tabindex="22" >
+			<div class="ui down button" onclick="account.submit();" tabindex="22" >
 				<i class="checkmark sign icon"></i>
 				送出
 			</div>
