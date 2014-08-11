@@ -23,8 +23,10 @@ function loginCheck($form) {
 		$query = "SELECT * FROM `Applications` WHERE `name` = '$form[name]' AND `idnum` = '$form[idnum]'LIMIT 1;";
 		if( $result = $mysqli->query($query_admin) ) {
 			if( $result->num_rows ) {
+				$row = $result->fetch_array();
 				$success_admin = true;
-				$_SESSION['username'] = $form['name'];
+				$_SESSION['username'] = $row['username'];
+				$_SESSION['name'] = $row['name'];
 				$_SESSION['admin'] = true;
 				$msg = "系統管理員登入成功！";
 			}
@@ -51,7 +53,7 @@ function loginCheck($form) {
 	$objRes->assign('response', 'innerHTML', $msg);
 	if( $success_admin ) {
 		$objRes->call("loginAdminSucceeded");
-		//$objRes->redirect("admin.php");
+		$objRes->redirect("admin.php");
 	}
 	else if( $success ) {
 		$objRes->call("loginSucceeded");
