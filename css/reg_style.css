@@ -31,3 +31,7 @@ textarea
 {
 	text-align:center;
 }
+.ui.button
+{
+	margin: 0 20px;
+}

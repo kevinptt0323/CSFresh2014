@@ -211,11 +211,11 @@ function registFailed() {
 			</div>
 		</form>
 		<div id="button_div">
-			<div id="submit_button" class="ui down button" onclick="account.submit();return false;" tabindex="22" >
+			<div class="ui down button" onclick="account.submit();return false;" tabindex="22" >
 				<i class="checkmark sign icon"></i>
 				送出
 			</div>
-			<div id="clear_button" class="ui down button" onclick="clearForm();" tabindex="23">
+			<div class="ui down button" onclick="clearForm();" tabindex="23">
 				<i class="trash icon"></i>
 				清除
 			</div>
