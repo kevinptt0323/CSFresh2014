@@ -1,0 +1,23 @@
+body
+{
+	background: url('../images/bg.png') fixed no-repeat;
+}
+#main
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -200px;
+	margin-top: -160px;
+	width: 400px;
+	height: 400px;
+}
+#loginForm
+{
+	box-shadow: 0 0 20px rgba(172, 172, 172, 0.8);
+}
+#button_div
+{
+	width: 100%;
+	text-align: center;
+}
