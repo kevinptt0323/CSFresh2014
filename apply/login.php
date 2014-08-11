@@ -88,6 +88,13 @@ function loginFailed() {
 	$('#response').removeClass("positive").addClass("error").show();
 	console.log("login failed");
 }
+$(function() {
+	$('#loginForm')
+		.form({
+			name: { identifier: 'name', rules: [{type: 'empty'},] },
+			idnum: { identifier: 'idnum', rules: [{type: 'empty'},] }
+		});
+});
 /* ]]> */
 	</script>
 	<?php $xajax->printJavascript(ROOT.'include'); ?>
@@ -95,8 +102,9 @@ function loginFailed() {
 
 <body>
 	<div class="container" id="main">
-		<form class="ui form segment" name="loginForm" id="loginForm">
-			<div class="ui error message" id="response"> </div>
+		<div class="ui attached message"> 登入 </div>
+		<form class="ui form attached fluid segment" name="loginForm" id="loginForm" onsubmit="$('#loginForm').form('validate form');<?php $loginCheck->printScript(); ?>;return false;">
+			<div class="ui message" id="response"> </div>
 			<div class="field">
 				<label>姓名</label>
 				<div class="ui left labeled icon input">
@@ -114,7 +122,7 @@ function loginFailed() {
 				</div>
 			</div>
 			<div id="button_div">
-				<input type="submit" value="Login" class="ui blue submit button" onclick="<?php $loginCheck->printScript(); ?>;return false;" />
+				<input type="submit" value="Login" class="ui blue submit button" />
 			</div>
 		</form>
 	</div>

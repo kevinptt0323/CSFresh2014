@@ -10,11 +10,12 @@ body
 	margin-left: -200px;
 	margin-top: -160px;
 	width: 400px;
-	height: 400px;
-}
-#loginForm
-{
+	border-radius: 0.325em 0.325em 0 0;
 	box-shadow: 0 0 20px rgba(172, 172, 172, 0.8);
+}
+#response
+{
+	display: none;
 }
 #button_div
 {
