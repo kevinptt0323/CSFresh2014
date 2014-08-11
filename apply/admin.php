@@ -4,8 +4,7 @@ require_once('include/include.php');
 session_start();
 
 if( isset($_GET['logout']) ) {
-	unset( $_SESSION['username'] );
-	$_SESSION['admin'] = "";
+	session_destroy();
 	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/apply/login.php\" />\n";
 	die();
 }
@@ -16,15 +15,24 @@ if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admi
 	else {
 		$content = "";
 		if( isset($_GET['q']) ) $curPage = $_GET['q'];
-		else $curPage = "";
+		else $curPage = "info";
 		switch( $curPage ) {
+			case 'info':
 			default:
-				$query = "SELECT a.aid AS '報名序號', a.time AS '時間', a.name AS '姓名', a.gender AS '性別',
-									a.payment AS '繳費方式', p.date AS '繳費日期'
-									FROM `Applications` AS `a`
-									LEFT JOIN `Payment` AS `p` ON a.aid = p.aid
-									ORDER BY a.time ASC";
-				$content = makeTable($result = $mysqli->query($query), "app");
+				$curPage = "info";
+				if( isset($_GET['aid']) && is_numeric($_GET['aid']) ) {
+					$aid = $_GET['aid'];
+					$query = "SELECT * FROM `Applications` WHERE `aid` = $aid LIMIT 1";
+					$content = makeInfo($result = $mysqli->query($query));
+				}
+				else {
+					$query = "SELECT a.aid AS '報名序號', a.time AS '時間', a.name AS '姓名', a.gender AS '性別',
+										a.payment AS '繳費方式', p.date AS '繳費日期'
+										FROM `Applications` AS `a`
+										LEFT JOIN `Payment` AS `p` ON a.aid = p.aid
+										ORDER BY a.time ASC";
+					$content = makeTable($result = $mysqli->query($query), "info");
+				}
 				$result->free();
 				break;
 			case 'insurance':
@@ -42,15 +50,23 @@ if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admi
 				$content = makeTable($result = $mysqli->query($query), "profile");
 				$result->free();
 				break;
-			case 'info':
-				if( isset($_GET['aid']) && is_numeric($_GET['aid']) )
-					$aid = $_GET['aid'];
-				else
-					$aid = 0;
-				$query = "SELECT * FROM `Applications` WHERE `aid` = $aid LIMIT 1";
-				$content = makeInfo($result = $mysqli->query($query));
-				$result->free();
+			case 'del_app':
+				$aid = $_GET['aid'];
+				//eventlog('DELETE id: '.$data['aid'].' name: '.$data['name'].' cell: '.$data['cellphone'].' IP: '.$_SERVER['REMOTE_ADDR']);
+				$mysqli->query("DELETE FROM `Applications` WHERE `aid` = $aid LIMIT 1");
+				$mysqli->query("DELETE FROM `Payment` WHERE `aid` = $aid LIMIT 1");
+				echo '<script type="text/javascript">history.back();</script>';
 				break;
+			/*
+			case 'del_pay':
+				$pid = $_GET['pid'];
+				$res = mysql_query("SELECT * FROM `payment` WHERE `pid` = $pid LIMIT 1");
+				$data = mysql_fetch_array($res);
+				eventlog('DELETE PAYMENT pid: '.$data['pid'].' id: '.$data['aid'].' type: '.$data['type'].' account: '.$data['account'].' IP: '.$_SERVER['REMOTE_ADDR']); 
+				mysql_query("DELETE FROM `payment` WHERE `pid` = $pid LIMIT 1");
+				echo '<script type="text/javascript">history.back();</script>';
+				break;
+			*/
 		}
 	}
 }
@@ -60,18 +76,18 @@ else {
 }
 function makeTable($res, $act) {
 	if( $res ) {
-		$list = '<table class="ui table segment">' . "\n" . '<tr>';
-		while( $field = $res->fetch_field() ) $list .= '<th>' . $field->name . '</th>';
-		if( $act=="app" ) $list .= '<th></th><th></th><th></th>';
-		else if( $act=="pay" ) $list .= '<th></th>';
-		$list .= '</tr>' . "\n";
+		$list = '<table class="ui table segment">' . "\n\t<tr>";
+		while( $field = $res->fetch_field() ) $list .= "<th>$field->name</th>";
+		if( $act=="info" ) $list .= "<th></th><th></th><th></th>";
+		else if( $act=="pay" ) $list .= "<th></th>";
+		$list .= "</tr>\n";
 		while( $row = $res->fetch_array() ){
-				$list .= '<tr>';
-				for($i=0; $i<$res->field_count; $i++) $list .= '<td>' . $row[$i] . '</td>';
-				if( $act=="app" ){
+				$list .= "\t<tr>";
+				for($i=0; $i<$res->field_count; $i++) $list .= "<td>$row[$i]</td>";
+				if( $act=="info" ){
 						$list .= '<td><a href="?q=info&aid='. $row['報名序號'] . '">詳細</a></td>';
 						if( 0 && $row[7] != '' )
-								$list .= '<td>登記現場繳費</td>';
+								$list .= "<td>登記現場繳費</td>";
 						else
 								$list .= '<td><a href="?q=mkpay&aid='. $row['報名序號'] . '">登記現場繳費</a></td>';
 						$list .= '<td><a href="javascript:del_app(' . $row['報名序號'] . ')">刪除</a></td>';
@@ -79,10 +95,10 @@ function makeTable($res, $act) {
 				else if( $act=="pay" ) {
 						$list .= '<td><a href="javascript:del_pay(' . $row['繳費編號'] . ')">刪除</a></td>';
 				}
-				$list .= '</tr>' . "\n";
+				$list .= "</tr>\n";
 		}
-		$list .= '</table>' . "\n";
-		$list .= '<p>資料共 ' . $res->num_rows . ' 筆</p>' . "\n";
+		$list .= "</table>\n";
+		$list .= "<p>資料共 $res->num_rows 筆</p>\n";
 	}
 	else
 		$list = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
@@ -93,10 +109,10 @@ function makeInfo($res){
 		$data = $res->fetch_array();
 		$list = '<table class="ui table segment">' . "\n";
 		for($i=0; $i<$res->field_count; $i++){
-			$list .= "\t" . '<tr><td>' . $res->fetch_field_direct($i)->name . '</td>';
-			$list .= '<td>' . nl2br($data[$i]) . '</td></tr>' . "\n";
+			$list .= "\t<tr><td>" . $res->fetch_field_direct($i)->name . "</td>";
+			$list .= "<td>" . nl2br($data[$i]) . "</td></tr>\n";
 		}
-		$list .= '</table>' . "\n";
+		$list .= "</table>\n";
 	}
 	else
 		$list = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
@@ -104,16 +120,20 @@ function makeInfo($res){
 }
 function generateNav($curPage) {
 	$data = [
-		["name"=>"", "alias"=>"報名資訊"],
+		["name"=>"info", "alias"=>"報名資訊"],
 		["name"=>"profile", "alias"=>"個人資料"],
-		["name"=>"insurance", "alias"=>"保險資料"]
+		["name"=>"insurance", "alias"=>"保險資料"],
+		["name"=>"", "alias"=>"&nbsp;"],
 	];
 	$list = "";
 	foreach( $data as $item ) {
 		$list .= "<a class=\"" . ($item["name"]==$curPage?"active ":"") . "item\" href=\"?q=$item[name]\">$item[alias]</a>\n";
 	}
-	$list .= "<span class=\"right item\">" . $_SESSION['name']  . "你好</span>\n";
-	$list .= "<a class=\"right item\" href=\"?logout\">登出</a>\n";
+	$list .= "<div class=\"right menu\">\n";
+	$list .= "\t<span class=\"item\">" . $_SESSION['name'] . "，你好</span>\n";
+	$list .= "\t<a class=\"item\" href=\"new_admin.php\">新增管理員</a>\n";
+	$list .= "\t<a class=\"item\" href=\"?logout\">登出</a>\n";
+	$list .= "</div>\n";
 	return $list;
 }
 ?>
@@ -127,12 +147,18 @@ function generateNav($curPage) {
 	<link rel="stylesheet" type="text/css" href="../css/semantic.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/admin.css" />
 	<script type="text/javascript" src="../js/semantic.js"></script>
-	<script type="text/javascript" src="admin.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+function del_app(aid){
+	if(confirm("確定刪除編號 "+aid+" ?")) location.href = "?q=del_app&aid=" + aid;
+}
+/* ]]> */
+</script>
 </head>
 
 <body>
 <div class="container" id="main">
-	<div class="nav ui pointing menu">
+	<div class="nav ui secondary pointing blue menu">
 <?php echo generateNav($curPage); ?>
 	</div>
 	<div class="content">
