@@ -24,13 +24,19 @@ function adminCheck($form) {
 		if( $result = $mysqli->query($query) ) {
 			if( $result->num_rows )
 				$msg = "已存在的帳號。";
-			else if( $mysqli->query($insert) ) {
-				$msg = "新增使用者成功！<br />";
-				$success = true;
+			else {
+				if( $result2 = $mysqli->query($insert) ) {
+					$msg = "新增使用者成功！<br />";
+					$success = true;
+				}
+				else
+					$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+				$result2->free();
 			}
 		}
 		else
 			$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+		$result->free();
 	}
 	$objRes->assign('response', 'innerHTML', $msg);
 	if( $success ) $objRes->call("adminSucceeded");

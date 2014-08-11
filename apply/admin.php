@@ -24,20 +24,23 @@ if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admi
 									FROM `Applications` AS `a`
 									LEFT JOIN `Payment` AS `p` ON a.aid = p.aid
 									ORDER BY a.time ASC";
-				$content = makeTable($mysqli->query($query), "app");
+				$content = makeTable($result = $mysqli->query($query), "app");
+				$result->free();
 				break;
 			case 'insurance':
 				$query = "SELECT `name` AS '姓名', `gender` AS '性別', `idnum` AS '身分證字號', `birthday` AS '生日',
 								`emergency_cont` AS '緊急連絡人', `relation` AS '關係', `emergency_tel` AS '緊急連絡電話'
 								FROM `Applications` ORDER BY `aid` ASC";
-				$content = makeTable($mysqli->query($query), "insurance");
+				$content = makeTable($result = $mysqli->query($query), "insurance");
+				$result->free();
 				break;
 			case 'profile':
 				$query = "SELECT `name` AS '姓名', `gender` AS '性別', `telephone` AS '電話', `cellphone` AS '手機',
 								`address` AS '地址', `graduation` AS '畢業高中', `disease` AS '特殊疾病',
 								`food` AS '飲食', `size` AS '營服尺寸'
 								FROM `Applications` ORDER BY `graduation` ASC";
-				$content = makeTable($mysqli->query($query), "profile");
+				$content = makeTable($result = $mysqli->query($query), "profile");
+				$result->free();
 				break;
 			case 'info':
 				if( isset($_GET['aid']) && is_numeric($_GET['aid']) )
@@ -45,7 +48,8 @@ if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admi
 				else
 					$aid = 0;
 				$query = "SELECT * FROM `Applications` WHERE `aid` = $aid LIMIT 1";
-				$content = makeInfo($mysqli->query($query));
+				$content = makeInfo($result = $mysqli->query($query));
+				$result->free();
 				break;
 		}
 	}
@@ -108,6 +112,7 @@ function generateNav($curPage) {
 	foreach( $data as $item ) {
 		$list .= "<a class=\"" . ($item["name"]==$curPage?"active ":"") . "item\" href=\"?q=$item[name]\">$item[alias]</a>\n";
 	}
+	$list .= "<span class=\"right item\">" . $_SESSION['name']  . "你好</span>\n";
 	$list .= "<a class=\"right item\" href=\"?logout\">登出</a>\n";
 	return $list;
 }

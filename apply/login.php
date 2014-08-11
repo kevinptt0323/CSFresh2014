@@ -31,23 +31,27 @@ function loginCheck($form) {
 		}
 		else
 			$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+		$result->free();
 		if( !$success_admin ) {
 			if( $result = $mysqli->query($query) ) {
 				if( !$result->num_rows )
 					$msg = "登入失敗。";
 				else {
 					$success = true;
+					$_SESSION['aid'] = $form['aid'];
+					$_SESSION['name'] = $form['name'];
 					$msg = "登入成功！";
 				}
 			}
 			else
 				$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+			$result->free();
 		}
 	}
 	$objRes->assign('response', 'innerHTML', $msg);
 	if( $success_admin ) {
 		$objRes->call("loginAdminSucceeded");
-		$objRes->redirect("admin.php");
+		//$objRes->redirect("admin.php");
 	}
 	else if( $success ) {
 		$objRes->call("loginSucceeded");

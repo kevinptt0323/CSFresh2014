@@ -30,17 +30,19 @@ function regCheck($form) {
 		if( $result = $mysqli->query($query) ) {
 			if( $result->num_rows )
 				$msg = "你已經報名過了哦！別這麼急啦^.&lt;";
-			else if( $mysqli->query($insert) ) {
-				$msg = $form['name'] . "，恭喜" . ($form['gender']=='M'?"你":"妳") . "報名成功！<br /><a href='../' style='color:#000'>點此返回首頁</a>";
-				$success = true;
-			}
 			else {
-				//$msg =  "暫時不開放報名唷～";
-				$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+				if( $result2 = $mysqli->query($insert) ) {
+					$msg = $form['name'] . "，恭喜" . ($form['gender']=='M'?"你":"妳") . "報名成功！<br /><a href='../' style='color:#000'>點此返回首頁</a>";
+					$success = true;
+				}
+				else
+					$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+				$result2->free();
 			}
 		}
 		else
 			$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+		$result->free();
 	}
 	$objRes->assign('regMsg', 'innerHTML' , $msg);
 	if( $success ) $objRes->call("registSucceeded");
