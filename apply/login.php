@@ -10,9 +10,6 @@ $loginCheck->useSingleQuote();
 $loginCheck->addParameter(XAJAX_FORM_VALUES, 'loginForm');
 $xajax->processRequest();
 
-if( isset($_POST['name']) ) $username = $_POST['name'];
-else $username = "";
-
 function loginCheck($form) {
 	global $mysqli;
 	$success = false;
@@ -27,6 +24,8 @@ function loginCheck($form) {
 		if( $result = $mysqli->query($query_admin) ) {
 			if( $result->num_rows ) {
 				$success_admin = true;
+				$_SESSION['username'] = $form['name'];
+				$_SESSION['admin'] = true;
 				$msg = "系統管理員登入成功！";
 			}
 		}
@@ -45,9 +44,15 @@ function loginCheck($form) {
 				$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
 		}
 	}
-	$objRes->assign('response', 'innerHTML' , $msg);
-	if( $success_admin ) $objRes->call("loginAdminSucceeded");
-	else if( $success ) $objRes->call("loginSucceeded");
+	$objRes->assign('response', 'innerHTML', $msg);
+	if( $success_admin ) {
+		$objRes->call("loginAdminSucceeded");
+		$objRes->redirect("admin.php");
+	}
+	else if( $success ) {
+		$objRes->call("loginSucceeded");
+		$objRes->redirect(".");
+	}
 	else $objRes->call("loginFailed");
 	return $objRes;
 }
@@ -90,7 +95,7 @@ function loginFailed() {
 
 <body>
 	<div class="container" id="main">
-		<form class="ui form segment" name="loginForm" id="loginForm" method="POST" action="<?php echo ROOT; ?>login.php">
+		<form class="ui form segment" name="loginForm" id="loginForm">
 			<div class="ui error message" id="response"> </div>
 			<div class="field">
 				<label>姓名</label>

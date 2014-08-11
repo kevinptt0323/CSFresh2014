@@ -3,11 +3,13 @@ require_once('include/auth.php');
 require_once('include/include.php');
 session_start();
 
-if( isset($_GET['howdoyouturnthison']) )
-	$_SESSION['godmode'] = true;
-else if( isset($_GET['logout']) )
-	$_SESSION['godmode'] = false;
-if( ( isset($_SESSION['godmode']) && $_SESSION['godmode'] ) || ( isset($_SESSION['login']) && isset($_SESSION['admin']) ) ) {
+if( isset($_GET['logout']) ) {
+	unset( $_SESSION['username'] );
+	$_SESSION['admin'] = "";
+	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/apply/login.php\" />\n";
+	die();
+}
+if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admin'] ) {
 	global $mysqli;
 	if( $mysqli->connect_error )
 		die("資料庫錯誤，請稍後再試。");
