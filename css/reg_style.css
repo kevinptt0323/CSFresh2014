@@ -10,20 +10,24 @@ body
 	font-size:11pt;
 	padding: 10px 0;
 }
-#reason_ta
+.ui.labeled.dropdown
 {
-	height:40px;
+	padding-right: 40px !important;
 }
-#expection_ta
+.ui.labeled.dropdown .corner.label
+{
+	font-size: 0.7em;
+	border-radius: 0px 0.3125em
+}
+.ui.radio.checkbox
+{
+	margin-top: 9px;
+}
+textarea
 {
 	height:40px;
 }
 #button_div
-{
-	text-align:center;
-	margin:auto;
-}
-#food
 {
 	text-align:center;
 }
