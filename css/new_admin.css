@@ -1,0 +1,20 @@
+body
+{
+	background: url('../images/bg.png') fixed no-repeat;
+}
+#main
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -200px;
+	margin-top: -250px;
+	width: 400px;
+	border-radius: 0.325em 0.325em 0 0;
+	box-shadow: 0 0 20px rgba(172, 172, 172, 0.8);
+}
+#button_div
+{
+	width: 100%;
+	text-align: center;
+}
