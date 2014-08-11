@@ -77,15 +77,15 @@ function escape(&$form, $checking) {
 	<script type="text/javascript">
 /* <![CDATA[ */
 function loginAdminSucceeded() {
-	$('#response').removeClass("error").addClass("positive").show();
+	$('#response').removeClass("blue").removeClass("error").addClass("positive").show();
 	console.log("login succeeded");
 }
 function loginSucceeded() {
-	$('#response').removeClass("error").addClass("positive").show();
+	$('#response').removeClass("blue").removeClass("error").addClass("positive").show();
 	console.log("login succeeded");
 }
 function loginFailed() {
-	$('#response').removeClass("positive").addClass("error").show();
+	$('#response').removeClass("blue").removeClass("positive").addClass("error").show();
 	console.log("login failed");
 }
 $(function() {
@@ -102,9 +102,9 @@ $(function() {
 
 <body>
 	<div class="container" id="main">
-		<div class="ui attached message"> 登入 </div>
+		<div class="ui large attached message"> 登入 </div>
+		<div class="ui blue attached fluid message" id="response"> </div>
 		<form class="ui form attached fluid segment" name="loginForm" id="loginForm" onsubmit="$('#loginForm').form('validate form');<?php $loginCheck->printScript(); ?>;return false;">
-			<div class="ui message" id="response"> </div>
 			<div class="field">
 				<label>姓名</label>
 				<div class="ui left labeled icon input">
