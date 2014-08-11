@@ -8,10 +8,10 @@ if( isset($_GET['howdoyouturnthison']) )
 else if( isset($_GET['logout']) )
 	$_SESSION['godmode'] = false;
 if( ( isset($_SESSION['godmode']) && $_SESSION['godmode'] ) || ( isset($_SESSION['login']) && isset($_SESSION['admin']) ) ) {
-	if( dbconn() )
+	global $mysqli;
+	if( $mysqli->connect_error )
 		die("資料庫錯誤，請稍後再試。");
 	else {
-		global $mysqli;
 		$content = "";
 		if( isset($_GET['q']) ) $curPage = $_GET['q'];
 		else $curPage = "";

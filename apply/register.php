@@ -11,14 +11,16 @@ $regCheck->addParameter(XAJAX_FORM_VALUES, 'registerForm');
 $xajax->processRequest();
 
 function regCheck($form) {
+	global $mysqli;
 	$success = false;
 	$objRes = new xajaxResponse();
-	escape($form);
+	escape($form,
+		['name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'cellphone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'disease', 'bloodtype', 'graduation', 'size', 'reason', 'expectation']
+	);
 	if( !check($form, $msg) );
-	else if( dbconn() )
+	else if( $mysqli->connect_error )
 		$msg = "資料庫錯誤，請稍後再試。";
 	else {
-		global $mysqli;
 		$query = "SELECT * FROM `Applications` WHERE `idnum` = '$form[idnum]' LIMIT 1;";
 		$insert = "INSERT INTO `Applications` (
 `name`, `gender`, `studentID`, `address`, `email`, `idnum`, `birthday`, `telephone`, `cellphone`, `emergency_cont`, `relation`, `emergency_tel`, `food`, `disease`, `bloodtype`, `graduation`, `size`, `reason`, `expectation`, `payment`
@@ -61,8 +63,7 @@ function check($form, &$msg) {
 		return false;
 	}
 }
-function escape(&$form) {
-	$checking = ['name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'cellphone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'disease', 'bloodtype', 'graduation', 'size', 'reason', 'expectation'];
+function escape(&$form, $checking) {
 	global $mysqli;
 	foreach($checking as $str) {
 		$form[$str] = htmlspecialchars(@$form[$str]);
