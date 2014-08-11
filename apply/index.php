@@ -22,7 +22,6 @@ else $username = "";
 	<link rel="stylesheet" href="../css/semantic.css" type="text/css"/>
 	<link rel="stylesheet" href="../css/reg_style.css" type="text/css"/>
 	<script type="text/javascript" src="../js/semantic.js"></script>
-	<script type="text/javascript" src="<?php echo ROOT; ?>register.js"></script>
 	<script type="text/javascript">
 /* <![CDATA[ */
 var account = {
@@ -33,6 +32,14 @@ var account = {
 	init: function() {
 	}
 }
+function clearForm() {
+	var elem = document.getElementById('registerForm').elements;
+	for(i=0; i<elem.length; ++i) {
+		if( elem[i].type=="text" || elem[i].type=="password" || elem[i].tagName=="TEXTAREA" ) elem[i].value="";
+		if( elem[i].type=="radio" ) elem[i].checked="";
+	}
+	$('.ui.dropdown').dropdown("restore defaults");
+}
 function registSucceeded() {
 	$('#regMsg').removeClass('info').removeClass('error').addClass('positive');
 	clearForm();
@@ -42,6 +49,27 @@ function registFailed() {
 	$('#regMsg').removeClass('info').removeClass('positive').addClass('error');
 	console.log("regist failed");
 }
+$(function() {
+	$('.ui.dropdown').dropdown() ;
+	$('#registerForm')
+		.form({
+			name:				{ identifier: 'name',				rules: [ { type: 'empty', } ] },
+			birthday:		{ identifier: 'birthday',		rules: [ { type: 'empty', } ] },
+			studentID:	{ identifier: 'studentID',	rules: [ { type: 'empty', } ] },
+			idnum:			{ identifier: 'idnum',			rules: [ { type: 'empty', } ] },
+			email:			{ identifier: 'email',			rules: [ { type: 'email', } ] },
+			gender:			{ identifier: 'gender',			rules: [ { type: 'empty', } ] },
+			telephone:	{ identifier: 'telephone',	rules: [ { type: 'empty', } ] },
+			address:		{ identifier: 'address',		rules: [ { type: 'empty', } ] },
+			emergency_cont:	{ identifier: 'emergency_cont',		rules: [ { type: 'empty', } ] },
+			emergency_tel:	{ identifier: 'emergency_tel',		rules: [ { type: 'empty', } ] },
+			relation:		{ identifier: 'relation',		rules: [ { type: 'empty', } ] },
+			bloodtype:	{ identifier: 'bloodtype',	rules: [ { type: 'empty', } ] },
+			graduation:	{ identifier: 'graduation',	rules: [ { type: 'empty', } ] },
+			size:				{ identifier: 'size',				rules: [ { type: 'empty', } ] },
+			food:				{ identifier: 'food',				rules: [ { type: 'checked', } ] },
+		});
+	});
 /* ]]> */
 	</script>
 	<?php $xajax->printJavascript(ROOT.'include'); ?>
@@ -223,25 +251,6 @@ function registFailed() {
 	</div>
 
 <script>
-$('.ui.dropdown').dropdown() ;
-$('#registerForm')
-	.form({
-		name:				{ identifier: 'name',				rules: [ { type: 'empty', } ] },
-		birthday:		{ identifier: 'birthday',		rules: [ { type: 'empty', } ] },
-		studentID:	{ identifier: 'studentID',	rules: [ { type: 'empty', } ] },
-		idnum:			{ identifier: 'idnum',			rules: [ { type: 'empty', } ] },
-		email:			{ identifier: 'email',			rules: [ { type: 'email', } ] },
-		gender:			{ identifier: 'gender',			rules: [ { type: 'empty', } ] },
-		telephone:	{ identifier: 'telephone',	rules: [ { type: 'empty', } ] },
-		address:		{ identifier: 'address',		rules: [ { type: 'empty', } ] },
-		emergency_cont:	{ identifier: 'emergency_cont',		rules: [ { type: 'empty', } ] },
-		emergency_tel:	{ identifier: 'emergency_tel',		rules: [ { type: 'empty', } ] },
-		relation:		{ identifier: 'relation',		rules: [ { type: 'empty', } ] },
-		bloodtype:	{ identifier: 'bloodtype',	rules: [ { type: 'empty', } ] },
-		graduation:	{ identifier: 'graduation',	rules: [ { type: 'empty', } ] },
-		size:				{ identifier: 'size',				rules: [ { type: 'empty', } ] },
-		food:				{ identifier: 'food',				rules: [ { type: 'checked', } ] },
-	});
 
 </script>
 </body>
