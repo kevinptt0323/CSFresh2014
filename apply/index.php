@@ -1,7 +1,6 @@
 <?php
 require_once('include/include.php');
 require_once('include/xajax_core/xajaxAIO.inc.php');
-session_start();
 
 $xajax = new xajax("register.php");
 $regCheck = $xajax->registerFunction('regCheck');
