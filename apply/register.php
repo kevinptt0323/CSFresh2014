@@ -47,13 +47,13 @@ function regCheck($form) {
 }
 function check($form, &$msg) {
 	$msg = "";
-	$checking = array('name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'bloodtype', 'graduation', 'size');
+	$checking = ['name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'bloodtype', 'graduation', 'size'];
 	foreach($checking as $str)
 		if( @$form[$str] == "" ) $msg = "error";
 	if( $msg != "" ) $msg = "紅框處不可為空白。";
 	else if( !filter_var($form["email"], FILTER_VALIDATE_EMAIL) )
-		$msg = "e-mail信箱格式錯誤！" . $form["email"];
-	else if( !@filter_var($form["idnum"], FILTER_CALLBACK, array("options"=>"checkIDNum")))
+		$msg = "e-mail信箱格式錯誤！";
+	else if( !@filter_var($form["idnum"], FILTER_CALLBACK, ["options"=>"checkIDNum"]))
 		$msg = "身分證字號格式錯誤！";
 	if( $msg==="" ) return true;
 	else {
@@ -62,7 +62,7 @@ function check($form, &$msg) {
 	}
 }
 function escape(&$form) {
-	$checking = array('name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'cellphone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'disease', 'bloodtype', 'graduation', 'size', 'reason', 'expectation');
+	$checking = ['name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'cellphone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'disease', 'bloodtype', 'graduation', 'size', 'reason', 'expectation'];
 	global $mysqli;
 	foreach($checking as $str) {
 		$form[$str] = htmlspecialchars(@$form[$str]);
@@ -72,15 +72,15 @@ function escape(&$form) {
 function checkIDNum($id) {
 	$id = strtoupper($id);
 	//建立字母分數陣列
-	$headPoint = array(
+	$headPoint = [
 		'A'=>1,'I'=>39,'O'=>48,'B'=>10,'C'=>19,'D'=>28,
 		'E'=>37,'F'=>46,'G'=>55,'H'=>64,'J'=>73,'K'=>82,
 		'L'=>2,'M'=>11,'N'=>20,'P'=>29,'Q'=>38,'R'=>47,
 		'S'=>56,'T'=>65,'U'=>74,'V'=>83,'W'=>21,'X'=>3,
 		'Y'=>12,'Z'=>30
-	);
+	];
 	//建立加權基數陣列
-	$multiply = array(8,7,6,5,4,3,2,1);
+	$multiply = [8,7,6,5,4,3,2,1];
 	//檢查身份字格式是否正確
 	if (ereg("^[a-zA-Z][1-2][0-9]+$",$id) AND strlen($id) == 10){
 		//切開字串
