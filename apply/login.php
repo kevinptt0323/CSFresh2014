@@ -19,7 +19,7 @@ function loginCheck($form) {
 	if( $mysqli->connect_error )
 		$msg = "資料庫錯誤，請稍後再試。";
 	else {
-		$query_admin = "SELECT * FROM `Admin` WHERE `username` = '$form[name]' AND `password` = sha2('$form[idnum]',256) LIMIT 1;";
+		$query_admin = "SELECT * FROM `Admin` WHERE `username` = '$form[name]' AND `password` = sha2('" . $form["idnum"].SALT ."',256) LIMIT 1;";
 		$query = "SELECT * FROM `Applications` WHERE `name` = '$form[name]' AND `idnum` = '$form[idnum]'LIMIT 1;";
 		if( $result = $mysqli->query($query_admin) ) {
 			if( $result->num_rows ) {
