@@ -1,4 +1,9 @@
 <?php
+if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
+	$redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+	header("Location: $redirect");
+	die();
+}
 require_once('include/include.php');
 require_once('include/xajax_core/xajaxAIO.inc.php');
 
