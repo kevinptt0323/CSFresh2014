@@ -136,7 +136,7 @@ function generateNav($curPage) {
 	}
 	$list .= "<div class=\"right menu\">\n";
 	$list .= "\t<span class=\"item\">" . $_SESSION['name'] . "，你好</span>\n";
-	$list .= "\t<a class=\"item\" href=\"new_admin.php\">新增管理員</a>\n";
+	$list .= "\t<a class=\"item\" href=\"new_admin.php?" . NEWADMINPASSWD . "\">新增管理員</a>\n";
 	$list .= "\t<a class=\"item\" href=\"?logout\">登出</a>\n";
 	$list .= "</div>\n";
 	return $list;

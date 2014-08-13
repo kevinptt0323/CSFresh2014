@@ -7,6 +7,7 @@ if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
 require_once('include/auth.php');
 require_once('include/include.php');
 require_once('include/xajax_core/xajaxAIO.inc.php');
+session_start();
 
 $xajax = new xajax();
 $adminCheck = $xajax->registerFunction('adminCheck');
@@ -14,7 +15,7 @@ $adminCheck->useSingleQuote();
 $adminCheck->addParameter(XAJAX_FORM_VALUES, 'adminForm');
 $xajax->processRequest();
 
-if( !isset($_GET[NEWADMINPASSWD]) ) {
+if( !isset($_GET[NEWADMINPASSWD]) && !(isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admin']) ) {
 	die();
 }
 function adminCheck($form) {
