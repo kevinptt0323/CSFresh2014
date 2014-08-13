@@ -14,6 +14,9 @@ $adminCheck->useSingleQuote();
 $adminCheck->addParameter(XAJAX_FORM_VALUES, 'adminForm');
 $xajax->processRequest();
 
+if( !isset($_GET[NEWADMINPASSWD]) ) {
+	die();
+}
 function adminCheck($form) {
 	global $mysqli;
 	$success = false;
