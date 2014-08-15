@@ -1,9 +1,4 @@
 <?php
-if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == ""){
-	$redirect = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-	header("Location: $redirect");
-	die();
-}
 require_once('include/include.php');
 require_once('include/xajax_core/xajaxAIO.inc.php');
 
@@ -21,7 +16,7 @@ else $username = "";
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<title>宿營?報名就對了啦!</title>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js?ver=2.0.3"></script>
 	<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
 	<link rel="stylesheet" href="../css/semantic.css" type="text/css"/>
 	<link rel="stylesheet" href="../css/reg_style.css" type="text/css"/>
