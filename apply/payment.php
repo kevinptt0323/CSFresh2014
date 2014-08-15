@@ -42,7 +42,8 @@ function paymentCheck($form) {
 	$success_admin = false;
 	$objRes = new xajaxResponse();
 	escape($form, ['account', 'date']);
-	if( $mysqli->connect_error )
+	if( !check($form, $msg) );
+	else if( $mysqli->connect_error )
 		$msg = "資料庫錯誤，請稍後再試。";
 	else {
 		$query = "SELECT * FROM `Payment` WHERE `aid` = '$_SESSION[aid]' LIMIT 1;";
@@ -76,7 +77,19 @@ function escape(&$form, $checking) {
 		$form[$str] = $mysqli->real_escape_string($form[$str]);
 	}
 }
-
+function check($form, &$msg) {
+	$msg = "";
+	$checking = ['account', 'date'];
+	foreach($checking as $str)
+		if( @$form[$str] == "" ) $msg = "error";
+	if( $msg != "" ) $msg = "紅框處不可為空白。";
+	else if( strlen($form['account'])!=5 ) $msg = "請輸入匯款(轉帳)帳號末5碼";
+	if( $msg==="" ) return true;
+	else {
+		$msg = "輸入錯誤！<img src=\"" . ROOT . "OAO.gif\" /><br/ >" . $msg;
+		return false;
+	}
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -113,8 +126,8 @@ function clearForm() {
 $(function() {
 	$('#paymentForm')
 		.form({
-			account: { identifier: 'account', rules: [{type: 'length[5]', prompt: '請輸入5個數字'}] },
-			date: { identifier: 'date', rules: [{type: 'empty', prompt: '請輸入日期'}] }
+			account: { identifier: 'account', rules: [{type: 'length[5]'}] },
+			date: { identifier: 'date', rules: [{type: 'empty'}] }
 		});
 });
 /* ]]> */
