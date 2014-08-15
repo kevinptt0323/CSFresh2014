@@ -39,7 +39,6 @@ function adminCheck($form) {
 				}
 				else
 					$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
-				$result2->free();
 			}
 		}
 		else

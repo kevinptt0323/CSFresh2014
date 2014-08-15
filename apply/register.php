@@ -30,13 +30,12 @@ function regCheck($form) {
 			if( $result->num_rows )
 				$msg = "你已經報名過了哦！別這麼急啦^.&lt;";
 			else {
-				if( $result2 = $mysqli->query($insert) ) {
+				if( $mysqli->query($insert) ) {
 					$msg = $form['name'] . "，恭喜" . ($form['gender']=='M'?"你":"妳") . "報名成功！<br /><a href='../' style='color:#000'>點此返回首頁</a>";
 					$success = true;
 				}
 				else
 					$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
-				$result2->free();
 			}
 		}
 		else
