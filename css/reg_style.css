@@ -10,6 +10,9 @@ body
 	font-size:11pt;
 	padding: 10px 0;
 }
+.ui.positive.message a {
+  color: #52a954;
+}
 .ui.labeled.dropdown
 {
 	padding-right: 40px !important;

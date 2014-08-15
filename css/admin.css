@@ -9,3 +9,12 @@ body
 	width: 80%;
 	margin: auto;
 }
+a
+{
+	color: #000;
+	text-decoration: none;
+}
+a:hover
+{
+	text-decoration: underline;
+}
