@@ -8,11 +8,6 @@ require_once('include/auth.php');
 require_once('include/include.php');
 session_start();
 
-if( isset($_GET['logout']) ) {
-	session_destroy();
-	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/apply/login.php\" />\n";
-	die();
-}
 if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admin'] ) {
 	global $mysqli;
 	if( $mysqli->connect_error )
@@ -43,7 +38,7 @@ if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admi
 			case 'insurance':
 				$query = "SELECT `name` AS '姓名', `gender` AS '性別', `idnum` AS '身分證字號', `birthday` AS '生日',
 								`emergency_cont` AS '緊急連絡人', `relation` AS '關係', `emergency_tel` AS '緊急連絡電話'
-								FROM `Applications` ORDER BY `aid` ASC";
+								FROM `Applications` ORDER BY `time` ASC";
 				$content = makeTable($result = $mysqli->query($query), "insurance");
 				$result->free();
 				break;
@@ -51,7 +46,7 @@ if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admi
 				$query = "SELECT `name` AS '姓名', `gender` AS '性別', `telephone` AS '電話', `cellphone` AS '手機',
 								`address` AS '地址', `graduation` AS '畢業高中', `disease` AS '特殊疾病',
 								`food` AS '飲食', `size` AS '營服尺寸'
-								FROM `Applications` ORDER BY `graduation` ASC";
+								FROM `Applications` ORDER BY `time` ASC";
 				$content = makeTable($result = $mysqli->query($query), "profile");
 				$result->free();
 				break;
@@ -137,7 +132,7 @@ function generateNav($curPage) {
 	$list .= "<div class=\"right menu\">\n";
 	$list .= "\t<span class=\"item\">" . $_SESSION['name'] . "，你好</span>\n";
 	$list .= "\t<a class=\"item\" href=\"new_admin.php?" . NEWADMINPASSWD . "\">新增管理員</a>\n";
-	$list .= "\t<a class=\"item\" href=\"?logout\">登出</a>\n";
+	$list .= "\t<a class=\"item\" href=\"login.php?logout\">登出</a>\n";
 	$list .= "</div>\n";
 	return $list;
 }
