@@ -54,7 +54,6 @@ $(function() {
 		.form({
 			name:				{ identifier: 'name',				rules: [ { type: 'empty', } ] },
 			birthday:		{ identifier: 'birthday',		rules: [ { type: 'empty', } ] },
-			studentID:	{ identifier: 'studentID',	rules: [ { type: 'empty', } ] },
 			idnum:			{ identifier: 'idnum',			rules: [ { type: 'empty', } ] },
 			email:			{ identifier: 'email',			rules: [ { type: 'email', } ] },
 			gender:			{ identifier: 'gender',			rules: [ { type: 'empty', } ] },
@@ -110,10 +109,7 @@ $(function() {
 					</div>
 					<div class="field">
 						<label>學號</label>
-						<div class="ui labeled input">
-							<input name="studentID" placeholder="請輸入學號" type="text" tabindex="4">
-							<div class="ui corner label"> <i class="asterisk icon"></i> </div>
-						</div>
+						<input name="studentID" placeholder="請輸入學號" type="text" tabindex="4">
 					</div>
 				</div>
 				<div class="two fields">

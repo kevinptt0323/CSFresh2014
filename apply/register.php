@@ -50,7 +50,7 @@ function regCheck($form) {
 }
 function check($form, &$msg) {
 	$msg = "";
-	$checking = ['name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'bloodtype', 'graduation', 'size'];
+	$checking = ['name', 'gender', 'address', 'email', 'idnum', 'birthday', 'telephone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'bloodtype', 'graduation', 'size'];
 	foreach($checking as $str)
 		if( @$form[$str] == "" ) $msg = "error";
 	if( $msg != "" ) $msg = "紅框處不可為空白。";
