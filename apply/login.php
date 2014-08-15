@@ -16,8 +16,16 @@ $loginCheck->useSingleQuote();
 $loginCheck->addParameter(XAJAX_FORM_VALUES, 'loginForm');
 $xajax->processRequest();
 
+if( isset($_GEW['logout_admin']) ) {
+	unset($_SESSION['admin_username']);
+	unset($_SESSION['admin_name']);
+	unset($_SESSION['admin']);
+	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/apply/login.php\" />\n";
+}
+
 if( isset($_GET['logout']) ) {
-	session_destroy();
+	unset($_SESSION['aid']);
+	unset($_SESSION['name']);
 	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/apply/login.php\" />\n";
 }
 
@@ -36,8 +44,8 @@ function loginCheck($form) {
 			if( $result->num_rows ) {
 				$success_admin = true;
 				$row = $result->fetch_array();
-				$_SESSION['username'] = $row['username'];
-				$_SESSION['name'] = $row['name'];
+				$_SESSION['admin_username'] = $row['username'];
+				$_SESSION['admin_name'] = $row['name'];
 				$_SESSION['admin'] = true;
 				$msg = "系統管理員登入成功！";
 			}

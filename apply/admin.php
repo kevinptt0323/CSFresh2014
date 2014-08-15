@@ -8,7 +8,7 @@ require_once('include/auth.php');
 require_once('include/include.php');
 session_start();
 
-if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admin'] ) {
+if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION['admin'] ) {
 	global $mysqli;
 	if( $mysqli->connect_error )
 		die("資料庫錯誤，請稍後再試。");
@@ -27,7 +27,8 @@ if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admi
 				}
 				else {
 					$query = "SELECT a.aid AS '報名序號', a.time AS '時間', a.name AS '姓名', a.gender AS '性別',
-										a.payment AS '繳費方式', p.date AS '繳費日期'
+										CASE WHEN a.payment=0 THEN '尚未繳費' WHEN a.payment=1 THEN '匯款' WHEN a.payment=2 THEN '現場繳費' END AS '繳費方式',
+										p.date AS '繳費日期', p.account AS '帳號末五碼'
 										FROM `Applications` AS `a`
 										LEFT JOIN `Payment` AS `p` ON a.aid = p.aid
 										ORDER BY a.time ASC";
@@ -45,7 +46,7 @@ if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admi
 			case 'profile':
 				$query = "SELECT `name` AS '姓名', `gender` AS '性別', `telephone` AS '電話', `cellphone` AS '手機',
 								`address` AS '地址', `graduation` AS '畢業高中', `disease` AS '特殊疾病',
-								`food` AS '飲食', `size` AS '營服尺寸'
+								CASE WHEN food='meat' THEN '葷' WHEN food='veg' THEN '素' END AS '飲食', `size` AS '營服尺寸'
 								FROM `Applications` ORDER BY `time` ASC";
 				$content = makeTable($result = $mysqli->query($query), "profile");
 				$result->free();
@@ -55,6 +56,15 @@ if( isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admi
 				//eventlog('DELETE id: '.$data['aid'].' name: '.$data['name'].' cell: '.$data['cellphone'].' IP: '.$_SERVER['REMOTE_ADDR']);
 				$mysqli->query("DELETE FROM `Applications` WHERE `aid` = $aid LIMIT 1");
 				$mysqli->query("DELETE FROM `Payment` WHERE `aid` = $aid LIMIT 1");
+				echo '<script type="text/javascript">history.back();</script>';
+				break;
+			case 'mkpay':
+				$aid = $_GET['aid'];
+				if( ($result = $mysqli->query("SELECT * FROM `Applications` WHERE `aid` = '$aid' LIMIT 1;")) && $result->num_rows ) {
+					$mysqli->query("INSERT INTO `Payment` (`aid`, `pay_type`, `date`) VALUE ('$aid', 2, DATE_FORMAT(NOW(), '%m/%e'))");
+					$mysqli->query("UPDATE `Applications` SET `payment` = '2' WHERE `aid` = '$aid'");
+				}
+				$result->free();
 				echo '<script type="text/javascript">history.back();</script>';
 				break;
 			/*
@@ -86,10 +96,10 @@ function makeTable($res, $act) {
 				for($i=0; $i<$res->field_count; $i++) $list .= "<td>$row[$i]</td>";
 				if( $act=="info" ){
 						$list .= '<td><a href="?q=info&aid='. $row['報名序號'] . '">詳細</a></td>';
-						if( 0 && $row[7] != '' )
-								$list .= "<td>登記現場繳費</td>";
+						if( $row['繳費方式']=="尚未繳費" )
+								$list .= '<td><a href="javascript:mkpay('. $row['報名序號'] . ')">登記現場繳費</a></td>';
 						else
-								$list .= '<td><a href="?q=mkpay&aid='. $row['報名序號'] . '">登記現場繳費</a></td>';
+								$list .= "<td></td>";
 						$list .= '<td><a href="javascript:del_app(' . $row['報名序號'] . ')">刪除</a></td>';
 				}
 				else if( $act=="pay" ) {
@@ -130,9 +140,9 @@ function generateNav($curPage) {
 		$list .= "<a class=\"" . ($item["name"]==$curPage?"active ":"") . "item\" href=\"?q=$item[name]\">$item[alias]</a>\n";
 	}
 	$list .= "<div class=\"right menu\">\n";
-	$list .= "\t<span class=\"item\">" . $_SESSION['name'] . "，你好</span>\n";
+	$list .= "\t<span class=\"item\">" . $_SESSION['admin_name'] . "，你好</span>\n";
 	$list .= "\t<a class=\"item\" href=\"new_admin.php?" . NEWADMINPASSWD . "\">新增管理員</a>\n";
-	$list .= "\t<a class=\"item\" href=\"login.php?logout\">登出</a>\n";
+	$list .= "\t<a class=\"item\" href=\"login.php?logout_admin\">登出</a>\n";
 	$list .= "</div>\n";
 	return $list;
 }
@@ -151,6 +161,9 @@ function generateNav($curPage) {
 /* <![CDATA[ */
 function del_app(aid){
 	if(confirm("確定刪除編號 "+aid+" ?")) location.href = "?q=del_app&aid=" + aid;
+}
+function mkpay(aid){
+	if(confirm("確定登記編號 "+aid+" 現場繳費?")) location.href = "?q=mkpay&aid=" + aid;
 }
 /* ]]> */
 </script>

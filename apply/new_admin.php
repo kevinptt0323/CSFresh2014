@@ -15,7 +15,7 @@ $adminCheck->useSingleQuote();
 $adminCheck->addParameter(XAJAX_FORM_VALUES, 'adminForm');
 $xajax->processRequest();
 
-if( !isset($_GET[NEWADMINPASSWD]) && !(isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admin']) ) {
+if( !isset($_GET[NEWADMINPASSWD]) && !(isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION['admin']) ) {
 	die();
 }
 function adminCheck($form) {
@@ -33,7 +33,7 @@ function adminCheck($form) {
 			if( $result->num_rows )
 				$msg = "已存在的帳號。";
 			else {
-				if( $result2 = $mysqli->query($insert) ) {
+				if( $mysqli->query($insert) ) {
 					$msg = "新增使用者成功！<br />";
 					$success = true;
 				}
