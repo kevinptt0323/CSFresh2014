@@ -16,6 +16,11 @@ $loginCheck->useSingleQuote();
 $loginCheck->addParameter(XAJAX_FORM_VALUES, 'loginForm');
 $xajax->processRequest();
 
+if( isset($_GET['logout']) ) {
+	session_destroy();
+	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/apply/login.php\" />\n";
+}
+
 function loginCheck($form) {
 	global $mysqli;
 	$success = false;
@@ -29,8 +34,8 @@ function loginCheck($form) {
 		$query = "SELECT * FROM `Applications` WHERE `name` = '$form[name]' AND `idnum` = '$form[idnum]'LIMIT 1;";
 		if( $result = $mysqli->query($query_admin) ) {
 			if( $result->num_rows ) {
-				$row = $result->fetch_array();
 				$success_admin = true;
+				$row = $result->fetch_array();
 				$_SESSION['username'] = $row['username'];
 				$_SESSION['name'] = $row['name'];
 				$_SESSION['admin'] = true;
@@ -46,8 +51,9 @@ function loginCheck($form) {
 					$msg = "登入失敗。";
 				else {
 					$success = true;
-					$_SESSION['aid'] = $form['aid'];
-					$_SESSION['name'] = $form['name'];
+					$row = $result->fetch_array();
+					$_SESSION['aid'] = $row['aid'];
+					$_SESSION['name'] = $row['name'];
 					$msg = "登入成功！";
 				}
 			}
@@ -63,7 +69,7 @@ function loginCheck($form) {
 	}
 	else if( $success ) {
 		$objRes->call("loginSucceeded");
-		$objRes->redirect(".");
+		$objRes->redirect("payment.php");
 	}
 	else $objRes->call("loginFailed");
 	return $objRes;
