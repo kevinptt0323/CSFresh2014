@@ -17,7 +17,7 @@ $paymentCheck->addParameter(XAJAX_FORM_VALUES, 'paymentForm');
 $xajax->processRequest();
 
 if( !isset($_SESSION['name']) ) {
-	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/login.php\" />\n";
+	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/apply/login.php\" />\n";
 	die();
 }
 
