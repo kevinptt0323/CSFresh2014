@@ -135,6 +135,10 @@ body.firefox #bottom
 	border-radius: 10px;
 	/*box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);*/
 }
+#NavBar #fb-like
+{
+	display: none;
+}
 #NavBar > .item,
 #NavBar > .item > a
 {
@@ -160,6 +164,12 @@ body.firefox #bottom
 	width: 200px;
 	box-shadow: 0 0 0;
 	border-radius: 0;
+}
+#NavBar.Float #fb-like
+{
+	display: block;
+	position: relative;
+	left: 25px;
 }
 /*#NavBar.Float.ui.pointing.menu .active.item:after {
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.3);
@@ -190,6 +200,7 @@ body.firefox #bottom
 	z-index: 30;
 	left: 220px;
 	padding-top: 130px;
+	padding-bottom: 20px;
 	width: 80%;
 }
 
