@@ -137,7 +137,8 @@ body.firefox #bottom
 }
 #NavBar #fb-like
 {
-	display: none;
+	position: absolute;
+	opacity: 0;
 }
 #NavBar > .item,
 #NavBar > .item > a
@@ -167,9 +168,10 @@ body.firefox #bottom
 }
 #NavBar.Float #fb-like
 {
-	display: block;
+	opacity: 1;
 	position: relative;
-	left: 25px;
+	left: 24px;
+	margin: 10px 0;
 }
 /*#NavBar.Float.ui.pointing.menu .active.item:after {
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.3);
