@@ -19,7 +19,16 @@ var staff =
 		}
 	}
 };
+function checkBrowser() {
+	if (navigator.userAgent.indexOf("Chrome") != -1) {
+		$("body").addClass("chrome");
+	}
+	if (navigator.userAgent.indexOf("Firefox") != -1) {
+		$("body").addClass("firefox");
+	}
+}
 jQuery(document).ready(function($) {
+	checkBrowser();
 	staff.init();
 	var $NavBar = $('#NavBar'), NavOffset = $NavBar.offset().top;
 	if($(window).scrollTop() > NavOffset) {

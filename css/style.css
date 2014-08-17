@@ -1,9 +1,17 @@
 body
 {
 	position: absolute;
-	background: url('../images/bg.png') fixed no-repeat;
 	width: 100%;
 	min-width: 1000px;
+}
+body.chrome,
+body.safari
+{
+	background: url('../images/bg.png') repeat;
+}
+body.firefox
+{
+	background: url('../images/bg.png') fixed no-repeat;
 }
 
 #main
@@ -108,6 +116,14 @@ a:hover.slidesjs-stop {
 	position: relative;
 	z-index: 20;
 	top: 540px;
+}
+body.chrome #bottom,
+body.safari #bottom
+{
+	background: url('../images/bg.png') repeat;
+}
+body.firefox #bottom
+{
 	background: url('../images/bg.png') fixed no-repeat;
 }
 #NavBar
