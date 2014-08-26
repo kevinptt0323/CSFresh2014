@@ -229,7 +229,7 @@ $(function() {
 				</div>
 				<div class="field">
 					<label>對大學的期待</label>
-					<textarea id="expection_ta" name="expectation" placeholder="Write your expection..." tabindex="21"></textarea>
+					<textarea id="expectation_ta" name="expectation" placeholder="Write your expectation..." tabindex="21"></textarea>
 				</div>
 			</div>
 		</form>
