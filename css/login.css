@@ -1,7 +1,14 @@
-body
+@media screen and (max-device-width: 480px) {
+
+#main
 {
-	background: url('../images/bg.png') fixed no-repeat;
+	margin: 40px auto;
+	padding: 0 20px;
 }
+
+}
+@media screen and (min-width: 480px) {
+
 #main
 {
 	position: absolute;
@@ -12,6 +19,13 @@ body
 	width: 400px;
 	border-radius: 0.325em 0.325em 0 0;
 	box-shadow: 0 0 20px rgba(172, 172, 172, 0.8);
+}
+
+}
+
+body
+{
+	background: url('../images/bg.png') fixed no-repeat;
 }
 #response
 {
