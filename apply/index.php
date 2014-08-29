@@ -131,7 +131,7 @@ $(function() {
 				<div class="two fields">
 					<div class="four wide field">
 						<label>手機</label>
-						<input name="cellphone" placeholder="0912-345678" type="text" tabindex="7">
+						<input name="cellphone" placeholder="0912345678" type="text" tabindex="7">
 					</div>
 					<div class="twelve wide field">
 						<label>地址</label>
@@ -166,7 +166,7 @@ $(function() {
 					<div class="field">
 						<label>緊急聯絡人電話</label>
 						<div class="ui labeled input">
-							<input name="emergency_tel" placeholder="0912-345678" type="text" tabindex="12">
+							<input name="emergency_tel" placeholder="0912345678" type="text" tabindex="12">
 							<div class="ui corner label"> <i class="asterisk icon"></i> </div>
 						</div>
 					</div>
