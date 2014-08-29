@@ -1,9 +1,7 @@
 NCTU CS Fresh 2014
 =================
 
-URL: https://kevinptt0323.github.io/CSFresh2014/
-
-http://csfresh2014.nctucs.net
+URL: http://csfresh2014.nctucs.net
 
 Introduction
 ------------
