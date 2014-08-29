@@ -16,7 +16,7 @@ $loginCheck->useSingleQuote();
 $loginCheck->addParameter(XAJAX_FORM_VALUES, 'loginForm');
 $xajax->processRequest();
 
-if( isset($_GEW['logout_admin']) ) {
+if( isset($_GET['logout_admin']) ) {
 	unset($_SESSION['admin_username']);
 	unset($_SESSION['admin_name']);
 	unset($_SESSION['admin']);

@@ -81,7 +81,7 @@ if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION
 	}
 }
 else {
-	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/\" />\n";
+	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/apply/login.php\" />\n";
 	die();
 }
 function makeTable($res, $act) {
