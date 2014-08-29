@@ -15,7 +15,7 @@ else $username = "";
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-	<title>宿營?報名就對了啦!</title>
+	<title>宿營?報名就對了啦! | 交大資工 2014 迎新宿營</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js?ver=2.0.3"></script>
 	<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
 	<link rel="stylesheet" href="../css/semantic.css" type="text/css"/>
