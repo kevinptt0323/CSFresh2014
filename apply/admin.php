@@ -152,7 +152,7 @@ function generateNav($curPage) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>管理者模式 | 交大資工 2014 迎新宿營</title>
+	<title>管理者模式 | 2014 交大資工 迎新宿營</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js?ver=2.0.3"></script>
 	<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="../css/semantic.css"/>
