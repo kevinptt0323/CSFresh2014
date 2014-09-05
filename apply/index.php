@@ -221,7 +221,7 @@ $(function() {
 				</div>
 				<div class="field">
 					<label>特殊疾病</label>
-					<input type="text" placeholder="看到總召就會想捏他的病…" name="disease" tabindex="18">
+					<input type="text" placeholder="看到總召就會想捏他的病~(如沒有請保持空白)" name="disease" tabindex="18">
 				</div>
 				<div class="field">
 					<label>為什麼想來迎新宿營咧?</label>
