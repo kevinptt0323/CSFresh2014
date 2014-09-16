@@ -19,6 +19,7 @@ $xajax->processRequest();
 if( isset($_GET['logout_admin']) ) {
 	unset($_SESSION['admin_username']);
 	unset($_SESSION['admin_name']);
+	unset($_SESSION['admin_uid']);
 	unset($_SESSION['admin']);
 	echo "<meta http-equiv=\"refresh\" content=\"0;url=http://CSFresh2014.nctucs.net/apply/login.php\" />\n";
 }
@@ -46,6 +47,7 @@ function loginCheck($form) {
 				$row = $result->fetch_array();
 				$_SESSION['admin_username'] = $row['username'];
 				$_SESSION['admin_name'] = $row['name'];
+				$_SESSION['admin_uid'] = $row['uid'];
 				$_SESSION['admin'] = true;
 				$msg = "系統管理員登入成功！";
 			}
@@ -136,7 +138,7 @@ $(function() {
 				<label>姓名</label>
 				<div class="ui left labeled icon input">
 					<i class="user icon"></i>
-					<input name="name" type="text" placeholder="姓名">
+					<input name="name" type="text" placeholder="姓名" autocomplete="off">
 					<div class="ui corner label"> <i class="icon asterisk"></i> </div>
 				</div>
 			</div>
