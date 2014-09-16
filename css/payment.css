@@ -12,7 +12,7 @@
 	top: 50%;
 	left: 50%;
 	margin-left: -200px;
-	margin-top: -200px;
+	margin-top: -250px;
 	width: 400px;
 	border-radius: 0.325em 0.325em 0 0;
 	box-shadow: 0 0 20px rgba(172, 172, 172, 0.8);
@@ -26,10 +26,22 @@ body
 {
 	display: none;
 }
+#paymentForm.paytype-2 .field:nth-child(3)
+{
+	display: none;
+}
+#paymentForm.payed .ui.corner.label
+{
+	display: none;
+}
 #button_div
 {
 	width: 100%;
 	text-align: center;
+}
+#paymentForm.payed #button_div #submit
+{
+	display: none;
 }
 .ui.positive.message a {
   color: #52A954;
