@@ -14,6 +14,8 @@ $xajax = new xajax();
 $paymentCheck = $xajax->registerFunction('paymentCheck');
 $paymentCheck->useSingleQuote();
 $paymentCheck->addParameter(XAJAX_FORM_VALUES, 'paymentForm');
+$paymentPreCheck = $xajax->registerFunction('paymentPreCheck');
+$paymentPreCheck->useSingleQuote();
 $xajax->processRequest();
 
 if( !isset($_SESSION['name']) ) {
@@ -23,19 +25,50 @@ if( !isset($_SESSION['name']) ) {
 
 $name = $_SESSION['name'];
 $query = "SELECT * FROM `Payment` WHERE `aid` = '$_SESSION[aid]' LIMIT 1;";
+$account = "";
+$date = "";
 if( $result = $mysqli->query($query) ) {
 	if( $result->num_rows ) {
 		$row = $result->fetch_array();
 		switch( $row['pay_type'] ) {
-			case '0': case '1': $pay_type = "匯款繳費";
-			case '2': $pay_type = "現場繳費";
+			case '0': case '1': $pay_type = "匯款繳費"; break;
+			case '2': $pay_type = "現場繳費"; break;
 		}
 		$date = $row['date'];
 		$account = $row['account'];
 	}
-	$pay_type = "匯款繳費";
+	else $pay_type = "匯款繳費";
 }
 
+function paymentPreCheck() {
+	global $mysqli;
+	$success = false;
+	$objRes = new xajaxResponse();
+	if( $mysqli->connect_error )
+		$msg = "資料庫錯誤，請稍後再試。";
+	else {
+		$query = "SELECT * FROM `Payment` WHERE `aid` = '$_SESSION[aid]' LIMIT 1;";
+		if( $result = $mysqli->query($query) ) {
+			if( $result->num_rows ) {
+				$msg = "已繳費";
+				$success = true;
+				$row = $result->fetch_array();
+				switch( $row['pay_type'] ) {
+					case '0': case '1': $objRes->append('paymentForm', 'className', ' paytype-1'); break;
+					case '2': $objRes->append('paymentForm', 'className', ' paytype-2'); break;
+				}
+			}
+		}
+		else
+			$msg = "資料庫錯誤，請稍後再試。<img src=\"" . ROOT . "OAO.gif\" />";
+		$result->free();
+	}
+	if( !isset($msg) ) return $objRes;
+	$objRes->assign('response', 'innerHTML' , $msg);
+	if( $success ) $objRes->call("paymentSucceeded");
+	else $objRes->call("paymentFailed");
+	return $objRes;
+}
 function paymentCheck($form) {
 	global $mysqli;
 	$success = false;
@@ -54,7 +87,7 @@ function paymentCheck($form) {
 				$msg = "你已經填寫過了哦！^.&lt;";
 			else {
 				if( $mysqli->query($insert) && $mysqli->query($update) ) {
-					$msg =  "填寫成功！<a href='login.php?logout'>點此登出</a>";
+					$msg =  "填寫成功！";
 					$success = true;
 				}
 				else
@@ -107,6 +140,7 @@ function check($form, &$msg) {
 /* <![CDATA[ */
 function paymentSucceeded() {
 	$('#response').removeClass("blue").removeClass("error").addClass("positive").show();
+	$('#paymentForm').addClass("payed").children('.field').children(' .input').children('input').attr("disabled", true);
 	console.log("add payment succeeded");
 	clearForm();
 }
@@ -124,6 +158,7 @@ function clearForm() {
 	$('.ui.dropdown').dropdown("restore defaults");
 }
 $(function() {
+	<?php $paymentPreCheck->printScript(); ?>;
 	$('#paymentForm')
 		.form({
 			account: { identifier: 'account', rules: [{type: 'length[5]'}] },
@@ -158,34 +193,20 @@ $(function() {
 				<label>匯款(轉帳)帳號末5碼</label>
 				<div class="ui left labeled icon input">
 					<i class="info letter icon"></i>
-<?php
-if( isset($account) ) {
-	echo "\t\t\t\t\t<input value=\"$account\" disabled=\"true\" type=\"text\" placeholder=\"匯款(轉帳)帳號末5碼\">\n";
-}
-else {
-	echo "\t\t\t\t\t<input name=\"account\" type=\"text\" placeholder=\"匯款(轉帳)帳號末5碼\">\n";
-	echo "\t\t\t\t\t<div class=\"ui corner label\"> <i class=\"icon asterisk\"></i> </div>\n";
-}
-?>
+					<input value="<?php echo $account; ?>" type="text" placeholder="匯款(轉帳)帳號末5碼">
+					<div class="ui corner label"> <i class="icon asterisk"></i> </div>
 				</div>
 			</div>
 			<div class="field">
 				<label>交易日期</label>
 				<div class="ui left labeled icon input">
 					<i class="calendar icon"></i>
-<?php
-if( isset($date) ) {
-	echo "\t\t\t\t\t<input value=\"$date\" disabled=\"true\" type=\"text\" placeholder=\"MM/DD，ex:01/01\">\n";
-}
-else {
-	echo "\t\t\t\t\t<input name=\"date\" type=\"text\" placeholder=\"MM/DD，ex:01/01\">\n";
-	echo "\t\t\t\t\t<div class=\"ui corner label\"> <i class=\"icon asterisk\"></i> </div>\n";
-}
-?>
+					<input value="<?php echo $date; ?>" type="text" placeholder="MM/DD，ex:01/01">
+					<div class="ui corner label"> <i class="icon asterisk"></i> </div>
 				</div>
 			</div>
 			<div id="button_div">
-				<?php echo isset($account)?"":'<input type="submit" value="送出" class="ui blue submit button" />' . "\n"; ?>
+				<input type="submit" id="submit" value="送出" class="ui blue submit button" />
 				<a href="login.php?logout" class="ui blue button">登出</a>
 			</div>
 		</form>
