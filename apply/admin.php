@@ -54,6 +54,8 @@ if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION
 			case 'del_app':
 				$aid = $_GET['aid'];
 				//eventlog('DELETE id: '.$data['aid'].' name: '.$data['name'].' cell: '.$data['cellphone'].' IP: '.$_SERVER['REMOTE_ADDR']);
+				echo '刪除失敗，請聯絡管理員';
+				break;
 				$mysqli->query("DELETE FROM `Applications` WHERE `aid` = $aid LIMIT 1");
 				$mysqli->query("DELETE FROM `Payment` WHERE `aid` = $aid LIMIT 1");
 				echo '<script type="text/javascript">history.back();</script>';
@@ -61,7 +63,7 @@ if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION
 			case 'mkpay':
 				$aid = $_GET['aid'];
 				if( ($result = $mysqli->query("SELECT * FROM `Applications` WHERE `aid` = '$aid' LIMIT 1;")) && $result->num_rows ) {
-					$mysqli->query("INSERT INTO `Payment` (`aid`, `pay_type`, `date`) VALUE ('$aid', 2, DATE_FORMAT(NOW(), '%m/%e'))");
+					$mysqli->query("INSERT INTO `Payment` (`aid`, `pay_type`, `date`, `uid`) VALUE ('$aid', 2, DATE_FORMAT(NOW(), '%m/%e'), '$_SESSION[admin_uid]')");
 					$mysqli->query("UPDATE `Applications` SET `payment` = '2' WHERE `aid` = '$aid'");
 				}
 				$result->free();
@@ -161,7 +163,7 @@ function generateNav($curPage) {
 <script type="text/javascript">
 /* <![CDATA[ */
 function del_app(aid){
-	if(confirm("確定刪除編號 "+aid+" ?")) location.href = "?q=del_app&aid=" + aid;
+	if( confirm("確定刪除編號 "+aid+" ?") && confirm("真的不後悔刪除編號 "+aid+" ?") ) location.href = "?q=del_app&aid=" + aid;
 }
 function mkpay(aid){
 	if(confirm("確定登記編號 "+aid+" 現場繳費?")) location.href = "?q=mkpay&aid=" + aid;
