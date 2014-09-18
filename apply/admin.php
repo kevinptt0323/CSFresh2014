@@ -26,7 +26,7 @@ if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION
 					$content = makeInfo($result = $mysqli->query($query));
 				}
 				else {
-					$query = "SELECT a.aid AS '報名序號', a.time AS '時間', a.name AS '姓名', a.gender AS '性別',
+					$query = "SELECT a.aid AS '報名序號', a.time AS '時間', a.name AS '姓名', a.studentID AS '學號', a.gender AS '性別',
 										CASE WHEN a.payment=0 THEN '尚未繳費' WHEN a.payment=1 THEN '匯款' WHEN a.payment=2 THEN '現場繳費' END AS '繳費方式',
 										p.date AS '繳費日期', p.account AS '帳號末五碼'
 										FROM `Applications` AS `a`
@@ -54,8 +54,8 @@ if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION
 			case 'del_app':
 				$aid = $_GET['aid'];
 				//eventlog('DELETE id: '.$data['aid'].' name: '.$data['name'].' cell: '.$data['cellphone'].' IP: '.$_SERVER['REMOTE_ADDR']);
-				echo '刪除失敗，請聯絡管理員';
-				break;
+				//echo '刪除失敗，請聯絡管理員';
+				//break;
 				$mysqli->query("DELETE FROM `Applications` WHERE `aid` = $aid LIMIT 1");
 				$mysqli->query("DELETE FROM `Payment` WHERE `aid` = $aid LIMIT 1");
 				echo '<script type="text/javascript">history.back();</script>';
