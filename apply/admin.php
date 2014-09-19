@@ -37,14 +37,14 @@ if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION
 				$result->free();
 				break;
 			case 'insurance':
-				$query = "SELECT `name` AS '姓名', `gender` AS '性別', `idnum` AS '身分證字號', `birthday` AS '生日',
+				$query = "SELECT aid AS '報名序號', `name` AS '姓名', `gender` AS '性別', `idnum` AS '身分證字號', `birthday` AS '生日',
 								`emergency_cont` AS '緊急連絡人', `relation` AS '關係', `emergency_tel` AS '緊急連絡電話'
 								FROM `Applications` ORDER BY `time` ASC";
 				$content = makeTable($result = $mysqli->query($query), "insurance");
 				$result->free();
 				break;
 			case 'profile':
-				$query = "SELECT `name` AS '姓名', `gender` AS '性別', `telephone` AS '電話', `cellphone` AS '手機',
+				$query = "SELECT aid AS '報名序號', `name` AS '姓名', `gender` AS '性別', `telephone` AS '電話', `cellphone` AS '手機',
 								`address` AS '地址', `graduation` AS '畢業高中', `disease` AS '特殊疾病',
 								CASE WHEN food='meat' THEN '葷' WHEN food='veg' THEN '素' END AS '飲食', `size` AS '營服尺寸'
 								FROM `Applications` ORDER BY `time` ASC";
@@ -90,19 +90,20 @@ function makeTable($res, $act) {
 	if( $res ) {
 		$list = '<table class="ui table segment">' . "\n\t<tr>";
 		while( $field = $res->fetch_field() ) $list .= "<th>$field->name</th>";
-		if( $act=="info" ) $list .= "<th></th><th></th><th></th>";
+		$list .= "<th></th>";
+		if( $act=="info" ) $list .= "<th></th><th></th>";
 		else if( $act=="pay" ) $list .= "<th></th>";
 		$list .= "</tr>\n";
 		while( $row = $res->fetch_array() ){
 				$list .= "\t<tr>";
 				for($i=0; $i<$res->field_count; $i++) $list .= "<td>$row[$i]</td>";
+				$list .= '<td><a href="?q=info&aid='. $row['報名序號'] . '">詳細</a></td>';
 				if( $act=="info" ){
-						$list .= '<td><a href="?q=info&aid='. $row['報名序號'] . '">詳細</a></td>';
-						if( $row['繳費方式']=="尚未繳費" )
-								$list .= '<td><a href="javascript:mkpay('. $row['報名序號'] . ')">登記現場繳費</a></td>';
-						else
-								$list .= "<td></td>";
-						$list .= '<td><a href="javascript:del_app(' . $row['報名序號'] . ')">刪除</a></td>';
+					if( $row['繳費方式']=="尚未繳費" )
+						$list .= '<td><a href="javascript:mkpay('. $row['報名序號'] . ')">登記現場繳費</a></td>';
+					else
+						$list .= "<td></td>";
+					$list .= '<td><a href="javascript:del_app(' . $row['報名序號'] . ')">刪除</a></td>';
 				}
 				else if( $act=="pay" ) {
 						$list .= '<td><a href="javascript:del_pay(' . $row['繳費編號'] . ')">刪除</a></td>';
