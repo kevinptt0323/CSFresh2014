@@ -19,3 +19,15 @@ a:hover
 {
 	text-decoration: underline;
 }
+td .ui.button
+{
+	width: 50px;
+}
+.edit
+{
+	display: none;
+}
+.edit form
+{
+	width: 100%;
+}

@@ -59,6 +59,7 @@ if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION
 				$mysqli->query("DELETE FROM `Applications` WHERE `aid` = $aid LIMIT 1");
 				$mysqli->query("DELETE FROM `Payment` WHERE `aid` = $aid LIMIT 1");
 				echo '<script type="text/javascript">history.back();</script>';
+				die();
 				break;
 			case 'mkpay':
 				$aid = $_GET['aid'];
@@ -68,6 +69,20 @@ if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION
 				}
 				$result->free();
 				echo '<script type="text/javascript">history.back();</script>';
+				die();
+				break;
+			case 'update':
+				if( isset($_GET['aid']) && isset($_POST['name']) && isset($_POST['value']) ) {
+					$aid = $_GET['aid'];
+					$name = $_POST['name'];
+					$value = $_POST['value'];
+					if( ($result = $mysqli->query("SELECT * FROM `Applications` WHERE `aid` = '$aid' LIMIT 1;")) && $result->num_rows ) {
+						$mysqli->query("UPDATE `Applications` SET `$name` = '$value' WHERE `aid` = '$aid'");
+					}
+					$result->free();
+				}
+				echo '<script type="text/javascript">history.back();</script>';
+				die();
 				break;
 			/*
 			case 'del_pay':
@@ -120,10 +135,20 @@ function makeTable($res, $act) {
 function makeInfo($res){
 	if( $res ) {
 		$data = $res->fetch_array();
-		$list = '<table class="ui table segment">' . "\n";
+		$list = "<table class=\"ui table segment\">\n";
 		for($i=0; $i<$res->field_count; $i++){
-			$list .= "\t<tr><td>" . $res->fetch_field_direct($i)->name . "</td>";
-			$list .= "<td>" . nl2br($data[$i]) . "</td></tr>\n";
+			$list .= "\t<tr>\n\t\t<td>" . $res->fetch_field_direct($i)->name . "</td>\n";
+			$list .= "\t\t<td><div class=\"data\">" . nl2br($data[$i]) . "</div><div class=\"edit\">";
+			if( $i>2 ) {
+				$list .= '<form class="ui small action input editing" action="?q=update&aid=' . $data[0] . '" method="post" rel="' . $i . '">';
+				$list .= '<input type="hidden" name="name" value="' . $res->fetch_field_direct($i)->name . '" />';
+				$list .= '<input type="text" name="value" value="' . nl2br($data[$i]) . '" />';
+				$list .= '<div class="ui small button submit" onclick="submitForm(' . $i . ');">確認</div><div class="ui small button cancel">取消</div>';
+				$list .= "</form>";
+			}
+			else
+				$list .= nl2br($data[$i]);
+			$list .= "</div>\n</td></tr>\n";
 		}
 		$list .= "</table>\n";
 	}
@@ -169,6 +194,23 @@ function del_app(aid){
 function mkpay(aid){
 	if(confirm("確定登記編號 "+aid+" 現場繳費?")) location.href = "?q=mkpay&aid=" + aid;
 }
+function submitForm(formID) {
+	$("form.editing").eq(formID).submit();
+	$("form.editing").eq(formID).parent().parent().children("div.edit").hide();
+	$("form.editing").eq(formID).parent().parent().children("div.data").show();
+}
+$(function() {
+	$("td:nth-child(2)").bind("dblclick", function() {
+		$(this).children("div.data").hide();
+		$(this).children("div.edit").show();
+	});
+	$("div.edit .submit").bind("click", function() {
+	});
+	$("div.edit .cancel").bind("click", function() {
+		$(this).parent().parent().parent().children("div.edit").hide();
+		$(this).parent().parent().parent().children("div.data").show();
+	});
+});
 /* ]]> */
 </script>
 </head>
@@ -179,6 +221,7 @@ function mkpay(aid){
 <?php echo generateNav($curPage); ?>
 	</div>
 	<div class="content">
+		<p>雙擊欲修改的項目以編輯。修改並送出之後，建議先按重新整理以確認資料更新。</p>
 <?php echo $content; ?>
 	</div>
 </div>
