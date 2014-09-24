@@ -23,7 +23,8 @@ if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION
 				if( isset($_GET['aid']) && is_numeric($_GET['aid']) ) {
 					$aid = $_GET['aid'];
 					$query = "SELECT * FROM `Applications` WHERE `aid` = $aid LIMIT 1";
-					$content = makeInfo($result = $mysqli->query($query));
+					$content = "<p>雙擊欲修改的項目以編輯。修改並送出之後，建議先按重新整理以確認資料更新。</p>\n";
+					$content .= makeInfo($result = $mysqli->query($query));
 				}
 				else {
 					$query = "SELECT a.aid AS '報名序號', a.time AS '時間', a.name AS '姓名', a.studentID AS '學號', a.gender AS '性別',
@@ -221,7 +222,6 @@ $(function() {
 <?php echo generateNav($curPage); ?>
 	</div>
 	<div class="content">
-		<p>雙擊欲修改的項目以編輯。修改並送出之後，建議先按重新整理以確認資料更新。</p>
 <?php echo $content; ?>
 	</div>
 </div>
