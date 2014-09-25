@@ -71,6 +71,7 @@ function escape(&$form, $checking) {
 	}
 }
 function checkIDNum($id) {
+	if( $id[0]=='*' ) return true;
 	$id = strtoupper($id);
 	//建立字母分數陣列
 	$headPoint = [
