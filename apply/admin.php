@@ -104,7 +104,7 @@ else {
 }
 function makeTable($res, $act) {
 	if( $res ) {
-		$list = '<table class="ui table segment">' . "\n\t<tr>";
+		$list = '<table class="ui table segment sortable">' . "\n\t<tr>";
 		while( $field = $res->fetch_field() ) $list .= "<th>$field->name</th>";
 		$list .= "<th></th>";
 		if( $act=="info" ) $list .= "<th></th><th></th>";
@@ -187,6 +187,7 @@ function generateNav($curPage) {
 	<link rel="stylesheet" type="text/css" href="../css/semantic.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/admin.css" />
 	<script type="text/javascript" src="../js/semantic.js"></script>
+	<script type="text/javascript" src="../js/sorttable.js"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
 function del_app(aid){
