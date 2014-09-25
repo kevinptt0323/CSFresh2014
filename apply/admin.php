@@ -196,9 +196,9 @@ function mkpay(aid){
 	if(confirm("確定登記編號 "+aid+" 現場繳費?")) location.href = "?q=mkpay&aid=" + aid;
 }
 function submitForm(formID) {
-	$("form.editing").eq(formID).submit();
-	$("form.editing").eq(formID).parent().parent().children("div.edit").hide();
-	$("form.editing").eq(formID).parent().parent().children("div.data").show();
+	$("form.editing[rel="+formID+"]").submit();
+	$("form.editing[rel="+formID+"]").eq(formID).parent().parent().children("div.edit").hide();
+	$("form.editing[rel="+formID+"]").eq(formID).parent().parent().children("div.data").show();
 }
 $(function() {
 	$("td:nth-child(2)").bind("dblclick", function() {
