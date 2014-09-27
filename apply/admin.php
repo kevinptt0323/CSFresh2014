@@ -33,7 +33,8 @@ if( isset($_SESSION['admin_username']) && isset($_SESSION['admin']) && $_SESSION
 										FROM `Applications` AS `a`
 										LEFT JOIN `Payment` AS `p` ON a.aid = p.aid
 										ORDER BY a.time ASC";
-					$content = makeTable($result = $mysqli->query($query), "info");
+					$content = "<p>點擊表格標題以排序。</p>\n";
+					$content .= makeTable($result = $mysqli->query($query), "info");
 				}
 				$result->free();
 				break;
