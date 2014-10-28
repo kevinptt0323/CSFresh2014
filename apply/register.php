@@ -13,6 +13,10 @@ function regCheck($form) {
 	global $mysqli;
 	$success = false;
 	$objRes = new xajaxResponse();
+	// disable apply system
+	$objRes->assign('regMsg', 'innerHTML' , '已經結束報名，歡迎明年再來！');
+	$objRes->call("registFailed");
+	return $objRes;
 	escape($form,
 		['name', 'gender', 'studentID', 'address', 'email', 'idnum', 'birthday', 'telephone', 'cellphone', 'emergency_cont', 'relation', 'emergency_tel', 'food', 'disease', 'bloodtype', 'graduation', 'size', 'reason', 'expectation']
 	);
