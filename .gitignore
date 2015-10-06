@@ -1,0 +1,11 @@
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+apply/include/include.php
+apply/include/auth.php
+40x.html
+50x.html
+favicon.ico
